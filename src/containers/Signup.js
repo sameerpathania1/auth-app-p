@@ -2,7 +2,11 @@ import React, { Component } from "react";
 import SignupForm from "../component/SignupForm";
 import validator from '../validations/signup';
 import * as auth from "../apis/auth";
-import { saveObject } from "../utils";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+toast.configure()
+
 class Signup extends Component {
 	state = {
 		user: {
@@ -42,11 +46,12 @@ class Signup extends Component {
 	}
 
 	isValid = (user) => {
-		const { errors, isValid } = validator(user);
+		const { errors = {}, isValid = false } = validator(user);
 		this.setState({ errors });
 		return isValid
 	}
 
+	notify = () => toast("Account has been created");
 
 	onSubmit = (e) => {
 		e.preventDefault();
@@ -55,6 +60,7 @@ class Signup extends Component {
 		if (this.isValid(user)) {
 			auth.signupApi(user).then(res => {
 				console.log(res, 'res');
+				this.notify();
 			}).catch(error => {
 				console.log(error, "the signup error response")
 			})
@@ -69,18 +75,24 @@ class Signup extends Component {
 	}
 
 	render() {
+		
 		const { user, isValidated, errors, address } = this.state;
 
 		console.log(user, errors, 'user');
-		return <SignupForm
-			user={user}
-			errors={errors}
-			address={address}
-			isValidated={isValidated}
-			onSubmit={this.onSubmit}
-			onChange={this.onChange}
-			goto={this.goto}
-		/>;
+		return (
+			<div>
+
+				<SignupForm
+					user={user}
+					errors={errors}
+					address={address}
+					isValidated={isValidated}
+					onSubmit={this.onSubmit}
+					onChange={this.onChange}
+					goto={this.goto}
+				/>
+			</div>
+		)
 	}
 }
 

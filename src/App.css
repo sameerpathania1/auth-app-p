@@ -1,0 +1,120 @@
+body {
+  background-color: #e4e7fd;
+}
+.App {
+  position: relative;
+  opacity: 0.97;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: "Noto Sans JP", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+
+}
+.onlycolor {
+  background-color: rgb(128, 83, 203, 0.95);
+  border-bottom-left-radius: 8px;
+  border-top-left-radius: 8px;
+}
+
+.heading {
+  margin-top: 30px;
+  font-weight: 400;
+}
+.text-color {
+  color: white;
+  text-align: center;
+}
+.font-thik {
+  font-size: 20px;
+  margin-top: 15px;
+  font-family: "Raleway", sans-serif;
+}
+.imgicon {
+  margin-top: 120px;
+  width: 30%;
+  height: 30%;
+}
+.bottomline {
+  margin-top: 160px;
+  padding-bottom: 50px;
+}
+.onlywhite {
+  background-color: white;
+
+  border-bottom-right-radius: 8px;
+  border-top-right-radius: 8px;
+}
+.signintext {
+  margin-top: 130px;
+  font-weight: 400;
+  font-size: 25px;
+  margin-bottom: 30px;
+}
+.btnsignin {
+  background-color: #8053cb;
+  border: none;
+}
+.btnsignin:hover {
+  background-color: #8e70c2;
+}
+.formcontrol {
+  margin-bottom: 25px;
+  border-color: #8e70c2;
+}
+.formcontrol:hover {
+  border-color: #8e70c2;
+}
+.controlinput::placeholder {
+  color: #969696;
+  font-size: 18px;
+  font-weight: 100;
+}
+.controlinput:hover {
+  border-color: #8e70c2;
+}
+.btncreateaccount {
+  background-color: #f6f3ff;
+  color: #8053cb;
+  border: 2px solid #e6dcfc;
+  margin-top: 80px;
+  border-radius: 6px;
+  text-align: center;
+  justify-content: center;
+  height: 70px;
+  font-size: 18px;
+}
+.btncreateaccount:hover {
+  background-color: #e0d5ff;
+  color: #8053cb;
+  border: 2px solid #d2bcff;
+}
+.bottomline {
+  font-size: 18px;
+}
+.bottomline i {
+  margin-right: 10px;
+  font-size: 17px;
+}
+.fa-arrow-left {
+  font-size: 30px;
+  color: #5f5f5f;
+}
+.signuptext {
+  margin-top: 60px;
+  font-weight: 400;
+  font-size: 25px;
+  margin-bottom: 30px;
+}
+.hiddenbtn {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+}
