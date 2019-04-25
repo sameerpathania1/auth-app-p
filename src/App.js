@@ -1,13 +1,12 @@
 import React from "react";
-import Login from "./component/User";
-import "./App.css";
+import Login from "./component/Login";
 import {
   BrowserRouter as Router,
   Route,
   Switch,
   Redirect
 } from "react-router-dom";
-import { Homepage } from "./containers";
+import { Homepage, Signup } from "./containers";
 import { isLoggedIn } from "./utils";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -23,7 +22,7 @@ const PublicRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-      isLoggedIn() ? <Redirect to="/" /> : <Login {...props} />
+      isLoggedIn() ? <Redirect to="/" /> : <Component {...props} />
     }
   />
 );
@@ -35,6 +34,7 @@ class App extends React.Component {
         <Switch>
           <PrivateRoute exact path="/" component={Homepage} />
           <PublicRoute path="/login" component={Login} />
+          <PublicRoute path="/signup" component={Signup} />
         </Switch>
       </Router>
     );

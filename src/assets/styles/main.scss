@@ -1,0 +1,14 @@
+p.error {
+  color: red;
+  font-size: 12px;
+}
+
+.form-group {
+    margin-bottom: 0px;
+}
+
+.form-control {
+    &.error {
+        border: 1px solid red;
+    }
+}

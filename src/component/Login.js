@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import * as auth from "../apis/auth";
 import * as userAction from "../apis/getUser";
-import { saveObject, isLoggedIn, getObject } from "../utils";
+import { saveObject, getObject } from "../utils";
 
 export default class extends Component {
   state = {
@@ -115,9 +115,9 @@ export default class extends Component {
               boxShadow: "none",
               backgroundColor: "#bbb"
             }}
-            onClick={this.getAllUsers}
+            onClick={() => this.props.history.push("/signup")}
           >
-            Get All Users
+            Register
           </button>
         </div>
       </div>
