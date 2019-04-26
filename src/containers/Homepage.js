@@ -1,13 +1,26 @@
 import React, { Component } from "react";
-import { removeObject } from "../utils";
+import { removeObject, getObject } from "../utils";
+import { Button, Col, Row } from "react-bootstrap";
 
 export default class extends Component {
+  
   logout = () => {
     removeObject("user");
     this.props.history.push("/login");
   };
 
   render() {
-    return <div onClick={this.logout}>Logout</div>;
+    return (
+      <div
+        style={{
+          marginTop: "100px",
+          alignItems: "center",
+          justifyContent: "center"
+        }}>
+        <Button style={{float: "right", border: "none", marginRight: "40px"}} onClick={this.logout}>
+        Sign Out</Button>
+        <h1 className="welcomename">Welcome, {getObject("user").name}</h1>
+      </div>
+    )
   }
 }

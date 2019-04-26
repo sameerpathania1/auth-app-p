@@ -5,7 +5,7 @@ const SignupForm = (props) => {
 	const { user = {}, errors = {}, address = {}, onChange, onSubmit, onCancel, isValidated, goto } = props;
 
 	return <Container fluid>
-		<Col xs={12} sm={4} md={{ span: 4, offset: 4 }}>
+		<Col style={{backgroundColor: "white", marginTop: "20px", paddingTop: "10px", borderRadius: "6px"}} xs={12} sm={4} md={{ span: 4, offset: 4 }}>
 			<Form onSubmit={onSubmit}>
 				<Form.Row>
 					<Form.Group as={Col}>

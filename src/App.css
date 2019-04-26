@@ -15,67 +15,23 @@ body {
   min-height: 100vh;
 
 }
-.onlycolor {
-  background-color: rgb(128, 83, 203, 0.95);
-  border-bottom-left-radius: 8px;
-  border-top-left-radius: 8px;
+.loginpage {
+    background: white;
+    padding-top: 80px;
+    padding-bottom: 30px;
+    margin-top: 90px;
+    border-radius: 6px;
 }
-
-.heading {
-  margin-top: 30px;
-  font-weight: 400;
-}
-.text-color {
-  color: white;
-  text-align: center;
-}
-.font-thik {
-  font-size: 20px;
-  margin-top: 15px;
-  font-family: "Raleway", sans-serif;
-}
-.imgicon {
-  margin-top: 120px;
-  width: 30%;
-  height: 30%;
-}
-.bottomline {
-  margin-top: 160px;
-  padding-bottom: 50px;
-}
-.onlywhite {
-  background-color: white;
-
-  border-bottom-right-radius: 8px;
-  border-top-right-radius: 8px;
-}
-.signintext {
-  margin-top: 130px;
-  font-weight: 400;
-  font-size: 25px;
-  margin-bottom: 30px;
+.controlinput {
+  margin-top: 20px;
 }
 .btnsignin {
+  margin-top: 30px;
   background-color: #8053cb;
   border: none;
 }
 .btnsignin:hover {
   background-color: #8e70c2;
-}
-.formcontrol {
-  margin-bottom: 25px;
-  border-color: #8e70c2;
-}
-.formcontrol:hover {
-  border-color: #8e70c2;
-}
-.controlinput::placeholder {
-  color: #969696;
-  font-size: 18px;
-  font-weight: 100;
-}
-.controlinput:hover {
-  border-color: #8e70c2;
 }
 .btncreateaccount {
   background-color: #f6f3ff;
@@ -93,28 +49,42 @@ body {
   color: #8053cb;
   border: 2px solid #d2bcff;
 }
-.bottomline {
-  font-size: 18px;
+.loader {
+  display: inline-block;
+  position: relative;
+  width: 120px;
+  height: 120px;
 }
-.bottomline i {
-  margin-right: 10px;
-  font-size: 17px;
+.loader:after {
+  content: " ";
+  display: block;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  margin: 6px;
+  box-sizing: border-box;
+  border: 26px solid rgb(210, 116, 223);
+  border-color: rgb(207, 138, 59) transparent rgb(69, 127, 212) transparent;
+  animation: loader 1.2s infinite;
 }
-.fa-arrow-left {
-  font-size: 30px;
-  color: #5f5f5f;
+@keyframes loader {
+  0% {
+    transform: rotate(0);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+  50% {
+    transform: rotate(900deg);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  100% {
+    transform: rotate(1800deg);
+  }
 }
-.signuptext {
-  margin-top: 60px;
-  font-weight: 400;
-  font-size: 25px;
-  margin-bottom: 30px;
+.welcomename {
+  text-align: center;
 }
-.hiddenbtn {
-  background-color: Transparent;
-  background-repeat: no-repeat;
+.btnlogout {
+  margin-top: 30px;
+  background-color: #c54138;
   border: none;
-  cursor: pointer;
-  overflow: hidden;
-  outline: none;
 }

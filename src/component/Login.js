@@ -3,8 +3,9 @@ import * as auth from "../apis/auth";
 import * as userAction from "../apis/getUser";
 import { saveObject, getObject } from "../utils";
 import { Col, Row, Form, Button, Container } from "react-bootstrap"
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Loader from "./Loading";
 
 toast.configure();
 export default class extends Component {
@@ -14,24 +15,26 @@ export default class extends Component {
     loading: false
   };
 
-  componentDidMount() {}
+  componentDidMount() { }
   _onChange = ({ target }) => {
     const { name, value } = target;
     this.setState({ [name]: value });
   };
-notify = () => toast("Logged In");
+  notify = () => toast.success("Logged In");
   login = () => {
     const { email, password } = this.state;
-    // this.setState({ loading: true });
-    auth.loginApi({ email, password }).then(res => {
-      saveObject("user", res.data);
-      this.props.history.push("/");
-      this.notify()
-    }).catch(error => {
-      console.log(error, "the; error response");
-    }).finally(() => {
-      this.setState({ loading: false });
-    });
+    this.setState({ loading: true });
+    auth
+      .loginApi({ email, password })
+      .then(res => {
+        saveObject("user", res.data);
+        this.props.history.push("/");
+        this.notify()
+      }).catch(error => {
+        console.log(error, "the; error response");
+      }).finally(() => {
+        this.setState({ loading: false });
+      });
   };
 
   getAllUsers = () => {
@@ -50,11 +53,11 @@ notify = () => toast("Logged In");
       });
   }
 
- 
-  
-  
+
+
+
   render() {
-    
+
 
     console.log(this.props, "props");
     const { loading } = this.state;
@@ -69,80 +72,53 @@ notify = () => toast("Logged In");
             justifyContent: "center"
           }}
         >
-          Loading...
+          <Loader></Loader>
         </div>
       );
     }
 
     return (
-
-       
-      <Container  fluid>
-        <Col className='onlywhite' xs={12} sm={4} md={{ span: 4, offset: 4 }}>
+      <Container fluid>
+        <Col className="loginpage" xs={12} sm={4} md={{ span: 4, offset: 4 }} centered>
           <Col>
-            <h2 className="signintext">Sign in</h2>
-          </Col>
-          <Col className="formstart">
+            <h1 style={{textAlign: "center"}}>Sign In</h1>
             <Form>
-              <Form.Group
-                controlId="forBasicemail"
-                className="formcontrol"
-              >
+              <Form.Group controlId="formGroupEmail">
                 <Form.Control
                   className="controlinput"
                   size="lg"
                   type="email"
                   placeholder="Email"
                   name="email"
-                  onChange={this._onChange}
-                />
+                  onChange={this._onChange} />
               </Form.Group>
+              <Form.Group controlId="formGroupPassword">
 
-              <Form.Group
-                controlId="formBasicPassword"
-                className="formcontrol"
-              >
                 <Form.Control
                   className="controlinput"
                   size="lg"
                   name="password"
                   type="password"
                   placeholder="Password"
-                  onChange={this._onChange}
-                />
+                  onChange={this._onChange} />
               </Form.Group>
-              <Form.Group>
-                <Row xs="12">
-                  <Col xs="7">
-                    <p
-                      style={{
-                        marginTop: "7px",
-                        cursor: "pointer",
-                        color: "#6f6f6f"
-                      }}
-                    >
-                      <a href>Forgot Password?</a>
-                    </p>
-                  </Col>
-                  <Col xs="5">
-                    <Button
-                      style={{ marginTop: "10 px" }}
-                      className="btnsignin"
-                      variant="primary"
-                      size="lg"
-                      block
-                      onClick={this.login}
-                    >
-                      Sign in
-                          </Button>
-                  </Col>
-                </Row>
-              </Form.Group>
+
+              <Button
+                style={{ marginTop: "10 px" }}
+                className="btnsignin"
+                variant="primary"
+                size="lg"
+                block
+                onClick={this.login}
+              >Sign in
+            </Button>
             </Form>
           </Col>
-          <Col className="text-center" block>
+          <Col>
             <Button
               className="btncreateaccount text-center"
+              variant="primary"
+              size="lg"
               block
               onClick={() => this.props.history.push("/signup")}
             >
@@ -151,7 +127,7 @@ notify = () => toast("Logged In");
             </Button>
           </Col>
         </Col>
-      </Container>
-    )
+      </Container >
+    );
   }
 }
