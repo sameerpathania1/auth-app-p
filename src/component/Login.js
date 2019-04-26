@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import * as auth from "../apis/auth";
-import * as userAction from "../apis/getUser";
 import { saveObject, getObject } from "../utils";
 import { Col, Row, Form, Button, Container } from "react-bootstrap"
 import { toast } from 'react-toastify';

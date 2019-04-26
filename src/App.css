@@ -64,7 +64,7 @@ body {
   margin: 6px;
   box-sizing: border-box;
   border: 26px solid rgb(210, 116, 223);
-  border-color: rgb(27, 160, 0) transparent rgb(20, 86, 161) transparent;
+  border-color: rgb(24, 153, 63) transparent rgb(221, 130, 45) transparent;
   animation: loader 1.2s infinite;
 }
 @keyframes loader {
