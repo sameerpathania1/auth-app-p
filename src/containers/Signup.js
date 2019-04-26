@@ -4,7 +4,8 @@ import validator from '../validations/signup';
 import * as auth from "../apis/auth";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import actions from "../actions"
+import { connect } from "react-redux"
 toast.configure()
 
 class Signup extends Component {
@@ -58,7 +59,7 @@ class Signup extends Component {
 		const { user } = this.state;
 
 		if (this.isValid(user)) {
-			auth.signupApi(user).then(res => {
+			actions.onSignupPress(user).then(res => {
 				console.log(res, 'res');
 				this.notify();
 			}).catch(error => {
@@ -75,7 +76,7 @@ class Signup extends Component {
 	}
 
 	render() {
-		
+
 		const { user, isValidated, errors, address } = this.state;
 
 		console.log(user, errors, 'user');
@@ -96,4 +97,4 @@ class Signup extends Component {
 	}
 }
 
-export default Signup;
+export default connect(state => state)(Signup);

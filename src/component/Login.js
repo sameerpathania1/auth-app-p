@@ -17,7 +17,6 @@ class Login extends Component {
     loading: false
   };
 
-  componentDidMount() { }
   _onChange = ({ target }) => {
     const { name, value } = target;
     this.setState({ [name]: value });
