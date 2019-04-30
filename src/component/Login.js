@@ -9,41 +9,44 @@ import { connect } from "react-redux"
 toast.configure();
 class Login extends Component {
   state = {
-    email: "",
-    password: "",
+    user: {
+      email: "",
+      password: "",
+    },
     loading: false
   };
 
-  _onChange = ({ target }) => {
-    const { name, value } = target;
-    this.setState({ [name]: value });
+  _onChange = ({ target: { name = '', value = '' } }) => {
+    this.setState({
+      user: {
+        ...this.state.user,
+        [name]: value
+      }
+    });
   };
 
   wrongEntered = () => {
-    const wrong = this.state;
-    this.setState(prevState => {
-      wrong.email = prevState.email
-      wrong.password = prevState.password
-    })
-    return wrong;
+    // const wrong = this.state;
+    // this.setState(prevState => {
+    //   wrong.email = prevState.email
+    //   wrong.password = prevState.password
+    // })
+    // return wrong;
   }
 
   notify = () => toast.success("Logged In");
-  login = () => {
-    const { email, password } = this.state;
-    this.setState({ loading: true });
-    actions
-      .onLoginPress({ email, password })
-      .then(res => {
 
-        saveObject("user", res.data);
-        this.props.history.push("/");
-        this.notify()
-      }).catch(() => {
-        this.wrongEntered();
-      }).finally(() => {
-        this.setState({ loading: false });
-      });
+  login = (e) => {
+    e.preventDefault();
+    const { user } = this.state;
+    this.setState({ loading: true });
+    actions.onLoginPress(user).then(res => {
+      this.setState({ loading: false });
+      this.notify();
+      this.props.history.push("/");
+    }).catch(() => {
+      this.setState({ loading: false });
+    })
   };
 
 
@@ -65,30 +68,17 @@ class Login extends Component {
    } */
 
   render() {
-
-    const { loading } = this.state;
-
-    if (loading) {
-      return (
-        <div
-          style={{
-            height: "100vh",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center"
-          }}
-        >
-          <Loader></Loader>
-        </div>
-      );
-    }
+    const { loading, user } = this.state;
 
     return (
       <Container fluid>
-        <Col className="loginpage" xs={12} sm={4} md={{ span: 4, offset: 4 }} centered>
+        {loading && <div className="custom-loader">
+          <Loader />
+        </div>}
+        <Col className="loginpage" xs={12} sm={4} md={{ span: 4, offset: 4 }}>
           <Col>
             <h1 style={{ textAlign: "center" }}>Sign In</h1>
-            <Form>
+            <Form onSubmit={this.login}>
               <Form.Group controlId="formGroupEmail">
                 <Form.Control
                   className="controlinput"
@@ -96,6 +86,7 @@ class Login extends Component {
                   type="email"
                   placeholder="Email"
                   name="email"
+                  value={user.email}
                   onChange={this._onChange} />
               </Form.Group>
               <Form.Group controlId="formGroupPassword">
@@ -104,18 +95,19 @@ class Login extends Component {
                   className="controlinput"
                   size="lg"
                   name="password"
+                  value={user.password}
                   type="password"
                   placeholder="Password"
                   onChange={this._onChange} />
               </Form.Group>
 
               <Button
+                type="submit"
                 style={{ marginTop: "10 px" }}
                 className="btnsignin"
                 variant="primary"
                 size="lg"
                 block
-                onClick={this.login}
               >Sign in
             </Button>
             </Form>

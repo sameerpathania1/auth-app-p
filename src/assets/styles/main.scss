@@ -12,3 +12,16 @@ p.error {
         border: 1px solid red;
     }
 }
+
+.custom-loader {
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99;
+    top: 0;
+    left: 0;
+    background-color: hsla(0, 0%, 0%, 0.28);
+}

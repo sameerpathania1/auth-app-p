@@ -1,4 +1,5 @@
 import types from "../types";
+import { saveObject } from "../utils";
 
 const initialstate = {
     loading: false,
@@ -15,6 +16,7 @@ export default function (state = initialstate, action) {
 
         case types.AUTH_SUCCESS: {
             const data = action.payload.data
+            saveObject('user', data)
             return {
                 ...state,
                 loading: false,

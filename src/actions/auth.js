@@ -1,6 +1,7 @@
 import types from "../types"
 import store from "../store"
 import { loginApi } from "../apis/auth";
+import { toast } from 'react-toastify';
 
 const { dispatch } = store;
 
@@ -11,13 +12,6 @@ const authFetch = () => {
     })
 }
 
-const loginsuccess = (data) => {
-    dispatch({
-        type: types.AUTH_SUCCESS,
-        payload: data
-    });
-};
-
 
 
 export function onLoginPress(data) {
@@ -25,11 +19,15 @@ export function onLoginPress(data) {
     return new Promise((resolve, reject) => {
         loginApi(data)
             .then(res => {
-                loginsuccess(res);
+                dispatch({
+                    type: types.AUTH_SUCCESS,
+                    payload: res
+                })
                 resolve(res);
             })
-            .catch(error => {
-                reject(error);
+            .catch(err => {
+                toast.error(err.response.data.message || 'Something went wrong!');
+                reject(err);
             })
     })
 }
