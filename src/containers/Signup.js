@@ -45,7 +45,13 @@ class Signup extends Component {
 		return isValid
 	}
 
-	notify = () => toast("Account has been created");
+	notify = () => toast("Account created redirecting to login page in 5 Seconds");
+
+	redirectToLogin = () => {
+		setTimeout(() => {
+			this.props.history.push("/")
+		}, 5000)
+	}
 
 	onSubmit = (e) => {
 		e.preventDefault();
@@ -57,6 +63,7 @@ class Signup extends Component {
 				.then(res => {
 					console.log(res, 'res');
 					this.notify();
+					this.redirectToLogin()
 				})
 				.catch(error => {
 					console.log(error, "the signup error response")
@@ -73,9 +80,6 @@ class Signup extends Component {
 
 	render() {
 		const { user, isValidated, errors, address } = this.state;
-		console.log(this.props, 'the props');
-
-		console.log(user, address, errors, 'user');
 		return (
 			<div>
 

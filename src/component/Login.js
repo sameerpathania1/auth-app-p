@@ -19,23 +19,34 @@ class Login extends Component {
     this.setState({ [name]: value });
   };
 
-  notify = () => toast.success("Logged In");
+  wrongEntered = () => {
+    const wrong = this.state;
+    this.setState(prevState => {
+      wrong.email = prevState.email
+      wrong.password = prevState.password
+    })
+    return wrong;
+  }
 
+  notify = () => toast.success("Logged In");
   login = () => {
     const { email, password } = this.state;
     this.setState({ loading: true });
     actions
       .onLoginPress({ email, password })
       .then(res => {
+
         saveObject("user", res.data);
         this.props.history.push("/");
         this.notify()
-      }).catch(error => {
-        console.log(error, "the; error response");
+      }).catch(() => {
+        this.wrongEntered();
       }).finally(() => {
         this.setState({ loading: false });
       });
   };
+
+
 
   /*  getAllUsers = () => {
      console.log("getuserfun");
@@ -54,7 +65,7 @@ class Login extends Component {
    } */
 
   render() {
-    console.log(this.props, "props");
+
     const { loading } = this.state;
 
     if (loading) {

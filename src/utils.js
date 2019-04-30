@@ -3,14 +3,11 @@ import { API_URL } from "./constants";
 
 export function apiGet(endpoint, header) {
   const finalEndpoint = finalUrl(endpoint);
-  console.log(header, "the header");
   return axios.get(finalEndpoint, { headers: header });
 }
 
 export function apiPost(endpoint, data) {
-  console.log(data, "the data value");
   const finalEndpoint = finalUrl(endpoint);
-  console.log(finalEndpoint, "the final endpoint");
   return axios.post(finalEndpoint, data);
 }
 
@@ -45,7 +42,6 @@ export const getObject = key => {
 
 export const isLoggedIn = () => {
   let user = getObject("user");
-  console.log(user && user.token, "isLoggedin");
   if (user && user.token) {
     return true;
   }

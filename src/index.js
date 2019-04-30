@@ -5,9 +5,7 @@ import App from "./App";
 import { Provider } from "react-redux"
 import store from "./store"
 import * as serviceWorker from "./serviceWorker";
-// import "./init";
 
-console.log(this, "this");
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById("root"));
 
