@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import SignupForm from "../component/SignupForm";
 import validator from '../validations/signup';
-import * as auth from "../apis/auth";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import actions from "../actions"
 import { connect } from "react-redux"
+
 toast.configure()
 
 class Signup extends Component {
@@ -29,21 +29,14 @@ class Signup extends Component {
 		isValidated: false
 	};
 
-	onChange = ({ target: { value, name } }) => {
-		this.setState({
-			user: {
-				...this.state.user,
-				[name]: value
-			},
-			errors: {
-				...this.state.errors,
-				[name]: ''
-			}
-		})
+	onChange = (key) => ({ target: { value, name } }) => {
+		let data = { ...this.state[key] };
+		data[name] = value;
+		this.setState({ [key]: data })
 	}
 
-	onChangeAddress = () => {
-
+	onCancel = () => {
+		this.props.history.push("/")
 	}
 
 	isValid = (user) => {
@@ -59,12 +52,15 @@ class Signup extends Component {
 		const { user } = this.state;
 
 		if (this.isValid(user)) {
-			actions.onSignupPress(user).then(res => {
-				console.log(res, 'res');
-				this.notify();
-			}).catch(error => {
-				console.log(error, "the signup error response")
-			})
+			actions
+				.onSignupPress(user)
+				.then(res => {
+					console.log(res, 'res');
+					this.notify();
+				})
+				.catch(error => {
+					console.log(error, "the signup error response")
+				})
 
 		} else {
 			this.setState({ isValidated: true })
@@ -76,20 +72,21 @@ class Signup extends Component {
 	}
 
 	render() {
-
 		const { user, isValidated, errors, address } = this.state;
+		console.log(this.props, 'the props');
 
-		console.log(user, errors, 'user');
+		console.log(user, address, errors, 'user');
 		return (
 			<div>
 
 				<SignupForm
 					user={user}
-					errors={errors}
 					address={address}
+					errors={errors}
 					isValidated={isValidated}
 					onSubmit={this.onSubmit}
 					onChange={this.onChange}
+					onCancel={this.onCancel}
 					goto={this.goto}
 				/>
 			</div>

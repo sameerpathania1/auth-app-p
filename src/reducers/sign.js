@@ -1,4 +1,4 @@
-import types from "../types";
+import types from "../types"
 
 const initialstate = {
     loading: false,
@@ -7,13 +7,13 @@ const initialstate = {
 
 export default function (state = initialstate, action) {
     switch (action.type) {
-        case types.AUTH_LOADING:
+        case types.SIGNUP_LOADING:
             return {
                 ...state,
                 loading: true
             };
 
-        case types.AUTH_SUCCESS: {
+        case types.SIGNUP_SUCCESS: {
             const data = action.payload.data
             return {
                 ...state,

@@ -1,21 +1,21 @@
 import React from "react";
-import { Row, Col, Form, Button, Container } from 'react-bootstrap';
+import { Col, Form, Button, Container } from 'react-bootstrap';
 
 const SignupForm = (props) => {
-	const { user = {}, errors = {}, address = {}, onChange, onSubmit, onCancel, isValidated, goto } = props;
+	const { user = {}, errors = {}, address = {}, onChange, onSubmit, onCancel, goto } = props;
 
 	return <Container fluid>
-		<Col style={{backgroundColor: "white", marginTop: "20px", paddingTop: "10px", borderRadius: "6px"}} xs={12} sm={4} md={{ span: 4, offset: 4 }}>
+		<Col style={{ backgroundColor: "white", marginTop: "20px", paddingTop: "10px", borderRadius: "6px" }} xs={12} sm={4} md={{ span: 4, offset: 4 }}>
 			<Form onSubmit={onSubmit}>
 				<Form.Row>
 					<Form.Group as={Col}>
 						<Form.Label>First Name</Form.Label>
-						<Form.Control className={ errors && errors.firstName ? 'error' : ''} type="text" name="firstName" value={user.firstName} onChange={onChange} />
+						<Form.Control className={errors && errors.firstName ? 'error' : ''} type="text" name="firstName" value={user.firstName} onChange={onChange("user")} />
 						{errors && errors.firstName && <p className="error">{errors.firstName}</p>}
 					</Form.Group>
 					<Form.Group as={Col}>
 						<Form.Label>Last Name</Form.Label>
-						<Form.Control className={errors && errors.lastName ? 'error' : ''} type="text" name="lastName" value={user.lastName} onChange={onChange} />
+						<Form.Control className={errors && errors.lastName ? 'error' : ''} type="text" name="lastName" value={user.lastName} onChange={onChange("user")} />
 						{errors && errors.lastName && <p className="error">{errors.lastName}</p>}
 					</Form.Group>
 				</Form.Row>
@@ -23,7 +23,7 @@ const SignupForm = (props) => {
 				<Form.Row>
 					<Form.Group as={Col}>
 						<Form.Label>Email</Form.Label>
-						<Form.Control className={errors && errors.email ? 'error' : ''} type="text" name="email" value={user.email} onChange={onChange} />
+						<Form.Control className={errors && errors.email ? 'error' : ''} type="text" name="email" value={user.email} onChange={onChange("user")} />
 						{errors && errors.email && <p className="error">{errors.email}</p>}
 					</Form.Group>
 				</Form.Row>
@@ -31,7 +31,7 @@ const SignupForm = (props) => {
 				<Form.Row>
 					<Form.Group as={Col}>
 						<Form.Label>Phone</Form.Label>
-						<Form.Control className={errors && errors.phone ? 'error' : ''} type="text" name="phone" value={user.phone} onChange={onChange} />
+						<Form.Control className={errors && errors.phone ? 'error' : ''} type="text" name="phone" value={user.phone} onChange={onChange("user")} />
 						{errors && errors.phone && <p className="error">{errors.phone}</p>}
 					</Form.Group>
 				</Form.Row>
@@ -39,7 +39,7 @@ const SignupForm = (props) => {
 				<Form.Row>
 					<Form.Group as={Col}>
 						<Form.Label>Password</Form.Label>
-						<Form.Control className={errors && errors.password ? 'error' : ''} type="password" name="password" value={user.password} onChange={onChange} />
+						<Form.Control className={errors && errors.password ? 'error' : ''} type="password" name="password" value={user.password} onChange={onChange("user")} />
 						{errors && errors.password && <p className="error">{errors.password}</p>}
 					</Form.Group>
 				</Form.Row>
@@ -47,35 +47,36 @@ const SignupForm = (props) => {
 				<Form.Row>
 					<Form.Group as={Col}>
 						<Form.Label>Confirm Password</Form.Label>
-						<Form.Control className={errors && errors.confirmPassword ? 'error' : ''} type="password" name="confirmPassword" value={user.confirmPassword} onChange={onChange} />
+						<Form.Control className={errors && errors.confirmPassword ? 'error' : ''} type="password" name="confirmPassword" value={user.confirmPassword} onChange={onChange("user")} />
 						{errors && errors.confirmPassword && <p className="error">{errors.confirmPassword}</p>}
 					</Form.Group>
 				</Form.Row>
 
 				<Form.Group controlId="formGridAddress2">
 					<Form.Label>Address</Form.Label>
-					<Form.Control value={address.address} />
+					<Form.Control value={address.address} type="text" name="address" onChange={onChange("address")} />
 				</Form.Group>
 
 				<Form.Row>
 					<Form.Group as={Col}>
 						<Form.Label>City</Form.Label>
-						<Form.Control value={address.city} />
+						<Form.Control value={address.city} type="text" name="city" onChange={onChange("address")} />
 					</Form.Group>
 					<Form.Group as={Col}>
 						<Form.Label>State</Form.Label>
-						<Form.Control value={address.state} />
+						<Form.Control value={address.state} name="state" onChange={onChange("address")} />
 					</Form.Group>
 				</Form.Row>
 
 				<Form.Row>
 					<Form.Group as={Col}>
 						<Form.Label>Pin</Form.Label>
-						<Form.Control value={address.zipcode} />
+						<Form.Control  value={address.zipCode} type="number" name="zipCode" onChange={onChange("address")} />
+						
 					</Form.Group>
 					<Form.Group as={Col}>
 						<Form.Label>Country</Form.Label>
-						<Form.Control as="select">
+						<Form.Control as="select" value={address.country} name="country" onChange={onChange("address")}>
 							<option>Choose...</option>
 							<option value="India">India</option>
 							<option value="Canada">Canada</option>
@@ -99,10 +100,9 @@ const SignupForm = (props) => {
 						<p>Already have an Id? <Button variant="success" type="submit" onClick={() => goto('/login')}>Login</Button></p>
 					</Form.Group>
 				</Form.Row>
-				
-		</Form>
+			</Form>
 		</Col>
-  </Container >
+	</Container >
 };
 
 export default SignupForm;

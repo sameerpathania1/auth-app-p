@@ -10,7 +10,6 @@ import {
 } from "react-router-dom";
 import { Homepage, Signup } from "./containers";
 import { isLoggedIn } from "./utils";
-import { Col } from "react-bootstrap";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -40,7 +39,7 @@ class App extends React.Component {
             <PublicRoute path="/login" component={Login} />
             <PublicRoute path="/signup" component={Signup} />
           </Switch>
-          </Router>
+        </Router>
       </div>
     );
   }

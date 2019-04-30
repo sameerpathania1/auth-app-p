@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { removeObject, getObject } from "../utils";
-import { Button, Col, Row } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 export default class extends Component {
   

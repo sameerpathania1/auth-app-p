@@ -7,7 +7,7 @@ export default function validate(data = {}) {
     if (!data.firstName && validator.isEmpty(data.firstName)) {
         errors['firstName'] = 'First Name is required!'
     }
-    
+
     if (!data.lastName && validator.isEmpty(data.lastName)) {
         errors['lastName'] = 'Last Name is required!'
     }
@@ -19,12 +19,12 @@ export default function validate(data = {}) {
     if (data.email && !email(data.email)) {
         errors['email'] = 'Invalid email!'
     }
-    
+
     if (!data.phone && validator.isEmpty(data.phone)) {
         errors['phone'] = 'Phone no. is required!'
     }
 
-    if (data.phone && data.phone.length < 10 ) {
+    if (data.phone && data.phone.length < 10) {
         errors['phone'] = 'Invalid Phone no.!'
     }
 
@@ -34,6 +34,9 @@ export default function validate(data = {}) {
 
     if ((data.password && !data.confirmPassword) || data.password !== data.confirmPassword) {
         errors['confirmPassword'] = 'Password didn\'t mathched';
+    }
+    if (data.zipCode && data.zipCode.length < 5) {
+        errors['zipCode'] = "invalid zipcode"
     }
 
     return {

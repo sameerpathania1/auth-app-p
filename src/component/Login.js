@@ -1,12 +1,11 @@
 import React, { Component } from "react";
-import { saveObject, getObject } from "../utils";
-import { Col, Row, Form, Button, Container } from "react-bootstrap"
+import { saveObject, } from "../utils";
+import { Col, Form, Button, Container } from "react-bootstrap"
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from "./Loading";
 import actions from "../actions"
 import { connect } from "react-redux"
-
 toast.configure();
 class Login extends Component {
   state = {
