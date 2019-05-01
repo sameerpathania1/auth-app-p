@@ -3,17 +3,18 @@ import { API_URL } from "./constants";
 
 export function apiGet(endpoint, header) {
   const finalEndpoint = finalUrl(endpoint);
-  return axios.get(finalEndpoint, { headers: header });
+  return apiRequest(finalEndpoint, {}, "get", {});
 }
 
-export function apiPost(endpoint, data) {
+export function apiPost(endpoint, data, headers = {}) {
   const finalEndpoint = finalUrl(endpoint);
-  return axios.post(finalEndpoint, data);
+  console.log(finalEndpoint, data, "url and data")
+  return apiRequest(finalEndpoint, data, "post", headers);
 }
 
 export function apiPut(endpoint, data) {
   const finalEndpoint = finalUrl(endpoint);
-  return axios.put(finalEndpoint, data);
+  return axios["put"](finalEndpoint, data);
 }
 
 export function apiDelete(endpoint, data, header) {
@@ -23,6 +24,27 @@ export function apiDelete(endpoint, data, header) {
   return axios.delete(finalEndpoint);
 }
 
+export function getHeaders() {
+  const user = getObject("user");
+  return {
+    Authorization: `Bearer ${user.token}`
+  }
+}
+
+export function apiRequest(endpoint, data, method, header) {
+
+  const headers = { ...getHeaders(), ...header };
+  if (method === "get" || method === "delete") {
+    data = {
+      headers
+    }
+  }
+  return axios[method](endpoint, data, { headers })
+
+
+
+
+}
 const finalUrl = slug => {
   return API_URL + slug;
 };

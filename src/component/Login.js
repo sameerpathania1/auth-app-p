@@ -39,13 +39,16 @@ class Login extends Component {
     e.preventDefault();
     const { user } = this.state;
     this.setState({ loading: true });
-    actions.onLoginPress(user).then(res => {
-      this.setState({ loading: false });
-      this.notify();
-      this.props.history.push("/");
-    }).catch(() => {
-      this.setState({ loading: false });
-    })
+    actions
+      .onLoginPress(user)
+      .then(res => {
+        this.setState({ loading: false });
+        this.notify();
+        this.props.history.push("/");
+      })
+      .catch(() => {
+        this.setState({ loading: false });
+      })
   };
 
 

@@ -1,7 +1,7 @@
 import React from "react";
 import Login from "./component/Login";
 import "./App.css"
-
+import Products from "./component/Products"
 import {
   BrowserRouter as Router,
   Route,
@@ -37,7 +37,7 @@ class App extends React.Component {
           <Switch>
             <PrivateRoute exact path="/" component={Homepage} />
             <PublicRoute path="/login" component={Login} />
-            <PublicRoute path="/signup" component={Signup} />
+            <PublicRoute path="/signup" component={Products} />
           </Switch>
         </Router>
       </div>

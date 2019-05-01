@@ -7,3 +7,7 @@ export function loginApi(data) {
 export function signupApi(data) {
   return apiPost("/users/signup", data);
 }
+export function productsApi(data) {
+  console.log(data, "data in api")
+  return apiPost("/products", data)
+}
