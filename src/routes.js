@@ -1,6 +1,5 @@
 import React from "react";
 import Login from "./component/Login";
-import "./App.css"
 import Products from "./component/Products"
 import {
   BrowserRouter as Router,
@@ -8,14 +7,21 @@ import {
   Switch,
   Redirect
 } from "react-router-dom";
-import { Homepage, Signup } from "./containers";
+import { Homepage, Signup, Sidebar } from "./containers";
 import { isLoggedIn } from "./utils";
+import CustomNav from "./containers/common/CustomNav";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-      isLoggedIn() ? <Component {...props} /> : <Redirect to="/login" />
+      isLoggedIn() ? <React.Fragment>
+        <CustomNav />
+        <Sidebar {...props}>
+
+          <Component {...props} />
+        </Sidebar>
+      </React.Fragment> : <Redirect to="/login" />
     }
   />
 );
@@ -29,7 +35,7 @@ const PublicRoute = ({ component: Component, ...rest }) => (
   />
 );
 
-class App extends React.Component {
+export default class extends React.Component {
   render() {
     return (
       <div>
@@ -37,7 +43,8 @@ class App extends React.Component {
           <Switch>
             <PrivateRoute exact path="/" component={Homepage} />
             <PublicRoute path="/login" component={Login} />
-            <PublicRoute path="/signup" component={Products} />
+            <PublicRoute path="/signup" component={Signup} />
+            <Route component={NotFound} />
           </Switch>
         </Router>
       </div>
@@ -45,4 +52,14 @@ class App extends React.Component {
   }
 }
 
-export default App;
+
+class NotFound extends React.Component {
+  state = {}
+  render() {
+    return (
+      <div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <h1>The route you are looking for is not found</h1>
+      </div>
+    );
+  }
+}

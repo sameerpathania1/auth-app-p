@@ -61,12 +61,12 @@ class Signup extends Component {
 			actions
 				.onSignupPress(user)
 				.then(res => {
-					console.log(res, 'res');
+
 					this.notify();
 					this.redirectToLogin()
 				})
 				.catch(error => {
-					console.log(error, "the signup error response")
+
 				})
 
 		} else {

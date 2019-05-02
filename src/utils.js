@@ -8,7 +8,6 @@ export function apiGet(endpoint, header) {
 
 export function apiPost(endpoint, data, headers = {}) {
   const finalEndpoint = finalUrl(endpoint);
-  console.log(finalEndpoint, data, "url and data")
   return apiRequest(finalEndpoint, data, "post", headers);
 }
 
@@ -25,25 +24,23 @@ export function apiDelete(endpoint, data, header) {
 }
 
 export function getHeaders() {
-  const user = getObject("user");
-  return {
-    Authorization: `Bearer ${user.token}`
+  const user = getObject("user") || {};
+  if (user && user.token) {
+    return {
+      Authorization: `Bearer ${user.token}`
+    };
   }
+  return {};
 }
 
 export function apiRequest(endpoint, data, method, header) {
-
   const headers = { ...getHeaders(), ...header };
   if (method === "get" || method === "delete") {
     data = {
       headers
     }
   }
-  return axios[method](endpoint, data, { headers })
-
-
-
-
+  return axios[method](endpoint, data, headers)
 }
 const finalUrl = slug => {
   return API_URL + slug;

@@ -36,6 +36,7 @@ class Login extends Component {
   notify = () => toast.success("Logged In");
 
   login = (e) => {
+    console.log("jkagsdjsadgfgjksd")
     e.preventDefault();
     const { user } = this.state;
     this.setState({ loading: true });
@@ -109,6 +110,7 @@ class Login extends Component {
                 className="btnsignin"
                 variant="primary"
                 size="lg"
+                onClick={this.login}
                 block
               >Sign in
             </Button>

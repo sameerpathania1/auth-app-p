@@ -1,3 +1,95 @@
+
+body {
+  background-color: #e4e7fd;
+}
+.App {
+  position: relative;
+  opacity: 0.97;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: "Noto Sans JP", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+
+}
+.loginpage {
+    background: white;
+    padding-top: 80px;
+    padding-bottom: 30px;
+    margin-top: 90px;
+    border-radius: 6px;
+}
+.controlinput {
+  margin-top: 20px;
+}
+.btnsignin {
+  margin-top: 30px;
+  background-color: #8053cb;
+  border: none;
+}
+.btnsignin:hover {
+  background-color: #8e70c2;
+}
+.btncreateaccount {
+  background-color: #f6f3ff;
+  color: #8053cb;
+  border: 2px solid #e6dcfc;
+  margin-top: 80px;
+  border-radius: 6px;
+  text-align: center;
+  justify-content: center;
+  height: 70px;
+  font-size: 18px;
+}
+.btncreateaccount:hover {
+  background-color: #e0d5ff;
+  color: #8053cb;
+  border: 2px solid #d2bcff;
+}
+.loader {
+  display: inline-block;
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+.loader:after {
+  content: " ";
+  display: block;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  margin: 6px;
+  box-sizing: border-box;
+  border: 26px solid rgb(210, 116, 223);
+  border-color: rgb(66, 66, 66) transparent rgb(66, 66, 66) transparent;
+  animation: loader 1.2s infinite;
+}
+@keyframes loader {
+  0% {
+    transform: rotate(0);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+  50% {
+    transform: rotate(900deg);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  100% {
+    transform: rotate(1800deg);
+  }
+}
+.welcomename {
+  text-align: center;
+}
+.btnlogout {
+  margin-top: 30px;
+  background-color: #c54138;
+  border: none;
+}
+
 p.error {
   color: red;
   font-size: 12px;
@@ -58,4 +150,10 @@ p.error {
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
+}
+
+.valid-link {
+  color: orange;
+  cursor: pointer;
+  background: #1d2630
 }
