@@ -24,41 +24,41 @@ const items = [
         value: "/userdetail"
     }
 ]
+const mql = window.matchMedia(`(min-width: 800px)`);
 
 class SideBar extends Component {
-    state = {
-        open: false
+    constructor(props) {
+        super(props);
+        this.state = {
+            sidebarDocked: mql.matches,
+            sidebarOpen: false
+        };
+
+        this.mediaQueryChanged = this.mediaQueryChanged.bind(this);
+        this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
     }
 
-    toggle = (open) => {
-        this.setState({ open: open });
+    componentWillMount() {
+        mql.addListener(this.mediaQueryChanged);
     }
 
-    goTo = (path = {}) => {
-        if (path && path.value) {
-            return <li className="valid-link" key={path.label} onClick={() => this.props.history.push(path.value)}>{path.label}</li>;
-        }
-        return <li className="invalid-link" key={path.label}>{path.label}</li>;
+    componentWillUnmount() {
+        mql.removeListener(this.mediaQueryChanged);
+    }
+
+    onSetSidebarOpen(open) {
+        this.setState({ sidebarOpen: open });
+    }
+
+    mediaQueryChanged() {
+        this.setState({ sidebarDocked: mql.matches, sidebarOpen: false });
     }
 
     render() {
         return (
-            <Sidebar
-                sidebar={<div>
-                    {items && items.length ?
-                        <ul style={{ listStyleType: 'none', fontSize: "20px" }}>
-                            {items.map(i => this.goTo(i))}
-                        </ul>
-                        : <p>Coming Soon...</p>}
-                </div>}
-                open={this.state.open}
-                docked="false"
-                onSetOpen={() => this.toggle("true")}
-                styles={{ sidebar: { background: "#343a40", color: "white", width: "15%", marginTop: "55px" } }}
-            >
-
-                {this.props.children}
-            </Sidebar>
+            <div class="sidenav">
+                {items.map(i => <a href={i.value}>{i.label}</a>)}
+            </div>
         );
     }
 }

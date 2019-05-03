@@ -118,13 +118,14 @@ p.error {
     background-color: hsla(0, 0%, 0%, 0.28);
 }
 .sidenav {
+  margin-top: 55px;
   height: 100%;
   width: 200px;
   position: fixed;
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #111;
+  background-color: #343a3e;
   overflow-x: hidden;
   padding-top: 20px;
 }
@@ -133,12 +134,13 @@ p.error {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
   font-size: 25px;
-  color: #818181;
+  color: #dadada;
   display: block;
 }
 
 .sidenav a:hover {
   color: #f1f1f1;
+  background-color: #252525
 }
 
 .main {
@@ -155,5 +157,4 @@ p.error {
 .valid-link {
   color: orange;
   cursor: pointer;
-  background: #1d2630
 }

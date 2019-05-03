@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import { Nav, Navbar, FormControl, Form, Button } from 'react-bootstrap';
+import {removeObject} from "../../utils"
+import { Homepage } from '..';
 
 class CustomNav extends Component {
     state = {}
+    logout = () => {
+        removeObject("user");
+        this.props.history.push("/login");
+    };
     render() {
         return (
             <div>
@@ -13,9 +19,12 @@ class CustomNav extends Component {
                         <Nav.Link href="#features">Features</Nav.Link>
                         <Nav.Link href="#pricing">Pricing</Nav.Link>
                     </Nav>
-                   
+                    <Form inline>
+
+                        <Homepage />
+                    </Form>
                 </Navbar>
-               
+
             </div>
         );
     }

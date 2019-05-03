@@ -10,17 +10,14 @@ import {
 import { Homepage, Signup, Sidebar } from "./containers";
 import { isLoggedIn } from "./utils";
 import CustomNav from "./containers/common/CustomNav";
+import MainComponent from "./containers/common/MainComponent";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
       isLoggedIn() ? <React.Fragment>
-        <CustomNav />
-        <Sidebar {...props}>
-
-          <Component {...props} />
-        </Sidebar>
+        <MainComponent />
       </React.Fragment> : <Redirect to="/login" />
     }
   />
