@@ -252,3 +252,62 @@ export const countriesList = [
     { value: "ZM", label: 'Zambia' },
     { value: "ZW", label: 'Zimbabwe' },
 ]
+
+export const homeDecor = [
+    {
+        id: "",
+        name: "",
+        offerPrice: "",
+        desc: "",
+        dp: ""
+    },
+    {
+        id: "",
+        name: "",
+        offerPrice: "",
+        desc: "",
+        dp: ""
+    },
+    {
+        id: "",
+        name: "",
+        offerPrice: "",
+        desc: "",
+        dp: ""
+    },
+    {
+        id: "",
+        name: "",
+        offerPrice: "",
+        desc: "",
+        dp: ""
+    },
+    {
+        id: "",
+        name: "",
+        offerPrice: "",
+        desc: "",
+        dp: ""
+    },
+    {
+        id: "",
+        name: "",
+        offerPrice: "",
+        desc: "",
+        dp: ""
+    },
+    {
+        id: "",
+        name: "",
+        offerPrice: "",
+        desc: "",
+        dp: ""
+    },
+    {
+        id: "",
+        name: "",
+        offerPrice: "",
+        desc: "",
+        dp: ""
+    },
+]

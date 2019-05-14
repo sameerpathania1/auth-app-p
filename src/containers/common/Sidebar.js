@@ -1,63 +1,52 @@
 import React, { Component } from 'react';
-import Sidebar from 'react-sidebar';
 
 
 const items = [
     {
         label: "Home",
-        value: "/"
+        value: "/",
+        icon: <i className="fas fa-home"></i>
     },
     {
-        label: "Products",
-        value: "/products"
+        label: " Show Products",
+        value: "/showproducts",
+        icon: <i className="fab fa-product-hunt"></i>
     },
     {
-        label: "My Orders",
-        value: ""
+        label: "Add Products",
+        value: "/products",
+        icon: <i className="fas fa-plus"></i>
     },
     {
-        label: "Cart",
-        value: ""
+        label: "About",
+        value: "/userdetails",
+        icon: <i className="fas fa-address-card"></i>
     },
     {
-        label: "User Detail",
-        value: "/userdetail"
+        label: "Account Settings",
+        value: "/accountsettings",
+        icon: <i className="fas fa-cogs"></i>
     }
 ]
-const mql = window.matchMedia(`(min-width: 800px)`);
 
 class SideBar extends Component {
+
     constructor(props) {
-        super(props);
-        this.state = {
-            sidebarDocked: mql.matches,
-            sidebarOpen: false
-        };
-
-        this.mediaQueryChanged = this.mediaQueryChanged.bind(this);
-        this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
+        super(props)
+        this.state = {}
     }
 
-    componentWillMount() {
-        mql.addListener(this.mediaQueryChanged);
+    goTo = (path = {}) => {
+        if (path && path.value) {
+            const isActive = this.props.location.pathname === path.value;
+            return <p key={path.label} className={isActive ? 'active' : ''} onClick={() => this.props.history.push(path.value)} > {path.icon} &nbsp;{path.label}</p>
+        }
     }
-
-    componentWillUnmount() {
-        mql.removeListener(this.mediaQueryChanged);
-    }
-
-    onSetSidebarOpen(open) {
-        this.setState({ sidebarOpen: open });
-    }
-
-    mediaQueryChanged() {
-        this.setState({ sidebarDocked: mql.matches, sidebarOpen: false });
-    }
-
     render() {
+        console.log(this.props, 'props in sidebar')
         return (
-            <div class="sidenav">
-                {items.map(i => <a href={i.value}>{i.label}</a>)}
+            <div className="sidenav">
+                {items.map(i => this.goTo(i))}
             </div>
         );
     }

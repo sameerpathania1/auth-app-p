@@ -15,7 +15,7 @@ export default function (state = initialstate, action) {
             };
 
         case types.AUTH_SUCCESS: {
-            const data = action.payload.data
+            const data = action.payload
             saveObject('user', data)
             return {
                 ...state,

@@ -7,8 +7,7 @@ const { dispatch } = store;
 
 const authFetch = () => {
     dispatch({
-        type: types.AUTH_LOADING,
-        payload: { isFetching: true }
+        type: types.AUTH_LOADING
     })
 }
 

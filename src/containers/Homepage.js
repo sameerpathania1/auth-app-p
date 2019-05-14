@@ -38,12 +38,9 @@ export default class extends Component {
 
   render() {
     return (
-      <div>
-        <Button style={{
-          float: "right", border: "none", marginRight: "40px"
-        }} onClick={this.logout}>
-          Sign Out</Button>
-       {/*  <h1 className="welcomename">Welcome, {getObject("user").name}</h1>
+      <div style={{ textAlign: "center" }}>
+        <h1>Welcome, {getObject("user").name}</h1>
+        {/*  <h1 className="welcomename">Welcome, {getObject("user").name}</h1>
 
         <div>
           <input type="text" name="name" placeholder="Product Name" value={this.state.name} onChange={this.onChange("product")} />

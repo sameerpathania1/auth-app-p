@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { toast } from "react-toastify"
 import { productsApi } from "../apis/auth";
-import { saveObject } from "../utils";
+import { saveObject, getObject } from "../utils";
 
 
 class Products extends Component {
@@ -16,14 +16,15 @@ class Products extends Component {
         let data = { ...this.state[key] };
         data[name] = value;
         this.setState({ [key]: data })
+        console.log(name, value)
     }
 
     onProduct = () => {
         const { product } = this.state
-
+        console.log("atleat prict")
         productsApi(product).then(res => {
             saveObject("product", res.data)
-            console.log(res, "inside api call")
+            console.log(res.data, "inside api call")
             toast.success("Product added");
         }).catch(err => {
             console.log(err.message, "error message")
@@ -31,13 +32,20 @@ class Products extends Component {
     }
 
     render() {
+        const styles = {
+            backgroundColor: "white",
+            margin: "auto",
+            width: "40%",
+            height: "300px"
+
+        }
         return (
 
-            <div>
-                <input type="text" name="name" placeholder="Product Name" value={this.state.name} onChange={this.onChange("product")} />
-                <input type="text" name="price" placeholder="Enter Price" value={this.state.price} onChange={this.onChange("product")} />
-                <h1>THI {this.state.product.name}</h1>
-                <button onClick={this.onProduct} >ADD ITEMS</button>
+            <div style={styles}>
+                <input type="text" name="name" placeholder="Product Name" value={this.state.product.name} onChange={this.onChange("product")} />
+                <input type="text" name="price" placeholder="Enter Price" value={this.state.product.price} onChange={this.onChange("product")} />
+                <h1>your Product name is  {this.state.product.name}</h1>
+                <button onClick={this.onProduct} >ADD Products</button>
             </div>
         );
     }

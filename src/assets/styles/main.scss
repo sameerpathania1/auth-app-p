@@ -119,34 +119,41 @@ p.error {
 }
 .sidenav {
   margin-top: 55px;
-  height: 100%;
+  height: 100%; 
   width: 200px;
+  padding: 0px;
   position: fixed;
   z-index: 1;
   top: 0;
   left: 0;
   background-color: #343a3e;
   overflow-x: hidden;
-  padding-top: 20px;
+  .active {
+    color: red;
+  }
 }
-
-.sidenav a {
-  padding: 6px 8px 6px 16px;
+.sidenav p {
+  margin: 0px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.sidenav p:hover {
+  background-color: #252525;
+}
+.sidenav p {
+  padding: 6px 8px 6px 0px;
   text-decoration: none;
-  font-size: 25px;
+  font-size: 18px;
   color: #dadada;
-  display: block;
+  
+}
+.sidenav i {
+  color: white;
+  padding: 0px 0px 0px 10px;
 }
 
 .sidenav a:hover {
   color: #f1f1f1;
-  background-color: #252525
-}
-
-.main {
-  margin-left: 200px; /* Same as the width of the sidenav */
-  font-size: 28px; /* Increased text to enable scrolling */
-  padding: 0px 10px;
 }
 
 @media screen and (max-height: 450px) {
@@ -157,4 +164,18 @@ p.error {
 .valid-link {
   color: orange;
   cursor: pointer;
+}
+
+
+.list-wrapper {
+  padding: 8px;
+  div {
+    border: 1px solid black;
+    padding: 16px;
+    margin-bottom: 4px;
+    p {
+      padding: 0px;
+      margin: 0px;
+    }
+  }
 }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Nav, Navbar, FormControl, Form, Button } from 'react-bootstrap';
 import {removeObject} from "../../utils"
-import { Homepage } from '..';
 
 class CustomNav extends Component {
     state = {}
@@ -21,7 +20,10 @@ class CustomNav extends Component {
                     </Nav>
                     <Form inline>
 
-                        <Homepage />
+                        <Button style={{
+                            float: "right", border: "none", marginRight: "0px"
+                        }} onClick={this.logout}>
+                            Sign Out</Button>
                     </Form>
                 </Navbar>
 

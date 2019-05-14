@@ -1,25 +1,33 @@
 import React from "react";
 import Login from "./component/Login";
-import Products from "./component/Products"
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-router-dom";
 import { Homepage, Signup, Sidebar } from "./containers";
 import { isLoggedIn } from "./utils";
 import CustomNav from "./containers/common/CustomNav";
+import ShowProducts from "./containers/Products/ShowProducts"
+import Products from "./component/Products";
 import MainComponent from "./containers/common/MainComponent";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
+
   <Route
     {...rest}
     render={props =>
+
       isLoggedIn() ? <React.Fragment>
-        <MainComponent />
+        {/* <CustomNav {...props}  >
+          <Component {...props} />
+        </CustomNav>
+        <Sidebar {...props} >
+          <Component  {...props} />
+        </Sidebar> */}
+        <MainComponent {...props}>
+          <Component  {...props} />
+        </MainComponent>
       </React.Fragment> : <Redirect to="/login" />
+
     }
+
   />
 );
 
@@ -35,16 +43,17 @@ const PublicRoute = ({ component: Component, ...rest }) => (
 export default class extends React.Component {
   render() {
     return (
-      <div>
-        <Router >
-          <Switch>
-            <PrivateRoute exact path="/" component={Homepage} />
-            <PublicRoute path="/login" component={Login} />
-            <PublicRoute path="/signup" component={Signup} />
-            <Route component={NotFound} />
-          </Switch>
-        </Router>
-      </div>
+      <Router >
+        <Switch>
+          <PrivateRoute exact path="/" component={Homepage} />
+          <PublicRoute path="/login" component={Login} />
+          <PublicRoute path="/signup" component={Signup} />
+          <PrivateRoute path="/showproducts" component={ShowProducts} />
+          <PrivateRoute path="/products" component={Products} />
+          <Route component={NotFound} />
+
+        </Switch>
+      </Router>
     );
   }
 }

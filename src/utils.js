@@ -1,7 +1,7 @@
 import axios from "axios";
 import { API_URL } from "./constants";
 
-export function apiGet(endpoint, header) {
+export function apiGet(endpoint) {
   const finalEndpoint = finalUrl(endpoint);
   return apiRequest(finalEndpoint, {}, "get", {});
 }
@@ -40,8 +40,11 @@ export function apiRequest(endpoint, data, method, header) {
       headers
     }
   }
-  return axios[method](endpoint, data, headers)
+  return axios[method](endpoint, data, headers).then(res => {
+    return res.data
+  })
 }
+
 const finalUrl = slug => {
   return API_URL + slug;
 };
@@ -56,7 +59,7 @@ export const removeObject = key => {
 };
 
 export const getObject = key => {
-  return JSON.parse(localStorage.getItem(key));
+  return JSON.parse(localStorage.getItem(key))
 };
 
 export const isLoggedIn = () => {

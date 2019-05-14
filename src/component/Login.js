@@ -23,20 +23,9 @@ class Login extends Component {
       }
     });
   };
-
-  wrongEntered = () => {
-    // const wrong = this.state;
-    // this.setState(prevState => {
-    //   wrong.email = prevState.email
-    //   wrong.password = prevState.password
-    // })
-    // return wrong;
-  }
-
   notify = () => toast.success("Logged In");
 
   login = (e) => {
-    console.log("jkagsdjsadgfgjksd")
     e.preventDefault();
     const { user } = this.state;
     this.setState({ loading: true });
@@ -44,7 +33,6 @@ class Login extends Component {
       .onLoginPress(user)
       .then(res => {
         this.setState({ loading: false });
-        this.notify();
         this.props.history.push("/");
       })
       .catch(() => {
