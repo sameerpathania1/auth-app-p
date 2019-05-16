@@ -9,6 +9,9 @@ export function getProductAPI(id) {
 }
 
 export function createProductAPI(data) {
-   return apiPost("/products", data);
+   const data1 = new FormData();
+   data1.append('name', data.name)
+   data1.append('price', data.price)
+   return apiPost("/products", data1);
 }
 

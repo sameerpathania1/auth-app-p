@@ -55,7 +55,7 @@ class Signup extends Component {
 
 	onSubmit = (e) => {
 		e.preventDefault();
-		const { user } = this.state;
+		const { user, address } = this.state;
 
 		if (this.isValid(user)) {
 			actions

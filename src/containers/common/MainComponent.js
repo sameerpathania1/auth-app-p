@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import CustomNav from './CustomNav';
 import SideBar from './Sidebar';
-import ShowProducts from '../Products/ShowProducts';
 import { Row, Col, Container } from 'react-bootstrap';
 
 
@@ -22,8 +21,10 @@ class MainComponent extends Component {
                             <Col xs={12} sm={1} md={1}>
                                 <SideBar {...this.props} />
                             </Col>
-                            <Col xs={12} sm={11} md={11} style={{ marginLeft: 200 }}>
-                                {this.props.children}
+                            <Col xs={12} sm={11} md={11}>
+                                <div className="body-wrapper">
+                                    {this.props.children}
+                                </div>
                             </Col>
                         </Row>
                     </Col>

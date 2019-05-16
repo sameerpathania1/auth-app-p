@@ -6,9 +6,10 @@ export function apiGet(endpoint) {
   return apiRequest(finalEndpoint, {}, "get", {});
 }
 
-export function apiPost(endpoint, data, headers = {}) {
+export function apiPost(endpoint, data) {
   const finalEndpoint = finalUrl(endpoint);
-  return apiRequest(finalEndpoint, data, "post", headers);
+  console.log(endpoint, getHeaders(), data, "apipost data for email")
+  return apiRequest(finalEndpoint, data, "post");
 }
 
 export function apiPut(endpoint, data) {
@@ -29,20 +30,22 @@ export function getHeaders() {
     return {
       Authorization: `Bearer ${user.token}`
     };
+
   }
   return {};
 }
 
-export function apiRequest(endpoint, data, method, header) {
+export function apiRequest(endpoint, data, method, header = {}) {
   const headers = { ...getHeaders(), ...header };
   if (method === "get" || method === "delete") {
     data = {
       headers
     }
   }
-  return axios[method](endpoint, data, headers).then(res => {
-    return res.data
-  })
+  return axios[method](endpoint, data, { headers }).then(res => {
+    return res.data;
+  },
+    console.log(headers, "final im"))
 }
 
 const finalUrl = slug => {

@@ -1,54 +1,98 @@
 import React, { Component } from "react"
 import { toast } from "react-toastify"
-import { productsApi } from "../apis/auth";
-import { saveObject, getObject } from "../utils";
-
-
+import actions from "../actions";
+import { connect } from "react-redux"
+import { Container, Col, Row, Button, Form, FormGroup } from "react-bootstrap"
+import { AssertionError } from "assert";
 class Products extends Component {
     state = {
         product: {
             name: "",
             price: ""
-        }
+        },
+        asset: {
+            url: "",
+            alt: ""
+        },
+        loading: true
     }
 
-    onChange = (key) => ({ target: { value, name } }) => {
+    _onChange = (key) => ({ target: { value, name } }) => {
         let data = { ...this.state[key] };
         data[name] = value;
         this.setState({ [key]: data })
-        console.log(name, value)
     }
 
-    onProduct = () => {
+
+    onProduct = (e) => {
+        e.preventDefault()
         const { product } = this.state
-        console.log("atleat prict")
-        productsApi(product).then(res => {
-            saveObject("product", res.data)
-            console.log(res.data, "inside api call")
-            toast.success("Product added");
-        }).catch(err => {
-            console.log(err.message, "error message")
+        this.setState({
+            loading: true
         })
+        actions
+            .addproductsapi(product)
+            .then(res => {
+                this.setState({
+                    loading: false
+                })
+                console.log("product added")
+            })
+            .catch(err => {
+                this.setState({
+                    loading: false
+                })
+                console.log("failed to add product")
+            })
+
     }
 
     render() {
-        const styles = {
-            backgroundColor: "white",
-            margin: "auto",
-            width: "40%",
-            height: "300px"
-
-        }
+        const { product } = this.state
         return (
 
-            <div style={styles}>
-                <input type="text" name="name" placeholder="Product Name" value={this.state.product.name} onChange={this.onChange("product")} />
-                <input type="text" name="price" placeholder="Enter Price" value={this.state.product.price} onChange={this.onChange("product")} />
-                <h1>your Product name is  {this.state.product.name}</h1>
-                <button onClick={this.onProduct} >ADD Products</button>
-            </div>
+            <Container className="addproducts">
+                <Col className="addproducts-1" xs={12} sm={4} md={{ span: 4, offset: 4 }}>
+                    <Col>
+                        <Form onSubmit={this.onProduct}>
+                            <Form.Group controlId="formGroupEmail">
+                                <Form.Control
+                                    className="controlinput"
+                                    size="lg"
+                                    type="text"
+                                    placeholder="Enter product Name"
+                                    name="name"
+                                    value={product.name}
+                                    onChange={this._onChange("product")} />
+                            </Form.Group>
+                            <Form.Group controlId="formGroupEmail">
+                                <Form.Control
+                                    className="controlinput"
+                                    size="lg"
+                                    type="text"
+                                    placeholder="Enter Product Price"
+                                    name="price"
+                                    value={product.price}
+                                    onChange={this._onChange("product")} />
+                            </Form.Group>
+                            <FormGroup>
+                                <Form.Control type="file" name="url" />
+                            </FormGroup>
+                            <Button
+                                type="submit"
+                                className="btnsignin"
+                                variant="primary"
+                                size="lg"
+                                block
+                                onClick={this.onProduct}
+                            >Add Product
+                            </Button>
+                        </Form>
+                    </Col>
+                </Col>
+            </Container>
         );
     }
 }
 
-export default Products;
+export default connect(state => state)(Products);

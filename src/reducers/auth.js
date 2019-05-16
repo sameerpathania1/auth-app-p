@@ -24,7 +24,7 @@ export default function (state = initialstate, action) {
             }
         }
         default:
-            break;
+            return { ...state };
     }
-    return { ...state };
+
 }

@@ -7,6 +7,10 @@ export function loginApi(data) {
 export function signupApi(data) {
   return apiPost("/users/signup", data);
 }
-export function productsApi(data, header) {
-  return apiPost("/products", data, header)
+export function productsApi(data) {
+  return apiPost("/products", data)
+}
+export function forgotPasswordApi(data) {
+  console.log(data, "forgotpassword api call")
+  return apiPost("/users/forgot-password", data)
 }

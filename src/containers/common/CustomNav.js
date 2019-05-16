@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Nav, Navbar, FormControl, Form, Button } from 'react-bootstrap';
-import {removeObject} from "../../utils"
+import { removeObject } from "../../utils"
 
 class CustomNav extends Component {
     state = {}
@@ -11,12 +11,9 @@ class CustomNav extends Component {
     render() {
         return (
             <div>
-                <Navbar bg="dark" variant="dark">
-                    <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+                <Navbar style={{ position: "fixed", width: '100%', zIndex: 100 }} bg="dark" variant="dark" block>
+                    <Navbar.Brand >Welcome</Navbar.Brand>
                     <Nav className="mr-auto">
-                        <Nav.Link href="#home">Home</Nav.Link>
-                        <Nav.Link href="#features">Features</Nav.Link>
-                        <Nav.Link href="#pricing">Pricing</Nav.Link>
                     </Nav>
                     <Form inline>
 

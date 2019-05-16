@@ -8,7 +8,7 @@ const items = [
         icon: <i className="fas fa-home"></i>
     },
     {
-        label: " Show Products",
+        label: "Show Products",
         value: "/showproducts",
         icon: <i className="fab fa-product-hunt"></i>
     },
@@ -19,7 +19,7 @@ const items = [
     },
     {
         label: "About",
-        value: "/userdetails",
+        value: "/about",
         icon: <i className="fas fa-address-card"></i>
     },
     {
@@ -31,12 +31,7 @@ const items = [
 
 class SideBar extends Component {
 
-    constructor(props) {
-        super(props)
-        this.state = {}
-    }
-
-    goTo = (path = {}) => {
+    ddddd = (path = {}) => {
         if (path && path.value) {
             const isActive = this.props.location.pathname === path.value;
             return <p key={path.label} className={isActive ? 'active' : ''} onClick={() => this.props.history.push(path.value)} > {path.icon} &nbsp;{path.label}</p>
@@ -46,7 +41,7 @@ class SideBar extends Component {
         console.log(this.props, 'props in sidebar')
         return (
             <div className="sidenav">
-                {items.map(i => this.goTo(i))}
+                {items.map(i => this.ddddd(i))}
             </div>
         );
     }

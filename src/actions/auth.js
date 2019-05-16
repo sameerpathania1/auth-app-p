@@ -11,8 +11,6 @@ const authFetch = () => {
     })
 }
 
-
-
 export function onLoginPress(data) {
     authFetch();
     return new Promise((resolve, reject) => {

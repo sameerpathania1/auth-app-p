@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import actions from '../../actions';
 import { connect } from 'react-redux';
-import { Row, Col } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
+import ShowProductCard from '../../component/ShowProductCard';
 
 
 class ShowProducts extends Component {
     state = {
-
         values: []
     }
 
@@ -27,27 +27,14 @@ class ShowProducts extends Component {
         return actions.getProduct(productId);
     }
 
-
     render() {
         const { products = [], product = {} } = this.props.products;
 
         return (
-            <Row>
-                <Col xs={12} sm={6} m={6} className="list-wrapper">
-                    {products && products.length ? products.map(item => {
-                        return <div key={item.id} onClick={() => this.selectProduct(item.id)}>
-                            <p>{item.name}</p>
-                            <p>{item.price}</p>
-                            <img src={item.asset.url} />
-                        </div>
-                    }) : <div>No items found!</div>}
-                </Col>
-                <Col xs={12} sm={6} m={6}>
-                    <div>
-                        <p>{product.name}</p>
-                        <p>{product.price}</p>
-                    </div>
-                </Col>
+            <Row className="list-wrapper-2">
+                {products && products.length ? products.map(item => {
+                    return <ShowProductCard imageurl={item.asset.url} name={item.name} price={item.price} />
+                }) : <div style={{ alignItems: "center", textAlign: "center" }}><h1>Loading please Wait !!</h1></div>}
             </Row>
         );
     }

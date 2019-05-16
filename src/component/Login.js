@@ -12,7 +12,8 @@ class Login extends Component {
       email: "",
       password: "",
     },
-    loading: false
+    loading: false,
+    no: 0
   };
 
   _onChange = ({ target: { name = '', value = '' } }) => {
@@ -23,6 +24,7 @@ class Login extends Component {
       }
     });
   };
+
   notify = () => toast.success("Logged In");
 
   login = (e) => {
@@ -59,6 +61,7 @@ class Login extends Component {
    } */
 
   render() {
+    console.log(this.state.no, 'no')
     const { loading, user } = this.state;
 
     return (
@@ -91,7 +94,9 @@ class Login extends Component {
                   placeholder="Password"
                   onChange={this._onChange} />
               </Form.Group>
-
+              <Form.Group>
+                <p style={{ margin: "10px 0px 0px 5px", cursor: "pointer" }} onClick={() => this.props.history.push("/forgotpassword")} >Forgot Password?</p>
+              </Form.Group>
               <Button
                 type="submit"
                 style={{ marginTop: "10 px" }}

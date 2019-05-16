@@ -1,33 +1,29 @@
 import React from "react";
 import Login from "./component/Login";
-import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-router-dom";
-import { Homepage, Signup, Sidebar } from "./containers";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import { Homepage, Signup, About, AccountSettings } from "./containers";
 import { isLoggedIn } from "./utils";
-import CustomNav from "./containers/common/CustomNav";
 import ShowProducts from "./containers/Products/ShowProducts"
 import Products from "./component/Products";
 import MainComponent from "./containers/common/MainComponent";
+import ForgotPassword from "./component/ForgotPassword";
+import ResetPassword from "./component/ResetPassword";
+import CheckMail from "./component/CheckMail"
+import { privateDecrypt } from "crypto";
+
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
 
   <Route
     {...rest}
     render={props =>
-
-      isLoggedIn() ? <React.Fragment>
-        {/* <CustomNav {...props}  >
-          <Component {...props} />
-        </CustomNav>
-        <Sidebar {...props} >
-          <Component  {...props} />
-        </Sidebar> */}
-        <MainComponent {...props}>
-          <Component  {...props} />
-        </MainComponent>
-      </React.Fragment> : <Redirect to="/login" />
-
+      isLoggedIn() ?
+        <React.Fragment>
+          <MainComponent {...props}>
+            <Component  {...props} />
+          </MainComponent>
+        </React.Fragment> : <Redirect to="/login" />
     }
-
   />
 );
 
@@ -50,6 +46,11 @@ export default class extends React.Component {
           <PublicRoute path="/signup" component={Signup} />
           <PrivateRoute path="/showproducts" component={ShowProducts} />
           <PrivateRoute path="/products" component={Products} />
+          <PublicRoute path="/forgotpassword" component={ForgotPassword} />
+          <PublicRoute path="/resetpassword/:token" component={ResetPassword} />
+          <PublicRoute path="/checkmail" component={CheckMail} />
+          <PrivateRoute path="/about" component={About} />
+          <PrivateRoute path="/accountsettings" component={AccountSettings} />
           <Route component={NotFound} />
 
         </Switch>
