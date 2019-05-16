@@ -1,15 +1,35 @@
 import React, { Component } from 'react';
 import { Container, Col, Button, Form } from "react-bootstrap"
 import actions from '../actions';
+import { toast } from 'react-toastify';
 
 class ResetPassword extends Component {
    state = {
-      password: "",
-      confirmpassword: ""
+      pass: {
+         password: "",
+         confirmpassword: ""
+      }
+   }
+
+
+   _onChange = (key) => ({ target: { value = {}, name = {} } }) => {
+      let data = { ...this.state }
+      data[name] = value;
+      this.setState({
+         [key]: data
+      })
+   }
+
+   isValid = () => {
+      const { password, confirmpassword } = this.state
+      if (password === confirmpassword) {
+         return true;
+      }
+      return false;
    }
 
    resetPassword = () => {
-      actions.resetPassword({ token: this.props.match && this.props.match.params && this.props.match.params.token || "", password: this.state.password || '' })
+      actions.resetPassword(this.isvalid() ? { token: this.props.match && this.props.match.params && this.props.match.params.token || "", password: this.state.password || '' } : toast.warn("Both Entered password should match"))
    }
 
 
@@ -17,7 +37,8 @@ class ResetPassword extends Component {
       console.log(this.props.match.params.token, 'param')
    }
    render() {
-      const { password, confirmpassword } = this.state
+      const { pass } = this.state;
+
       return (
          <Container fluid>
             <Col className="loginpage" xs={12} sm={4} md={{ span: 4, offset: 4 }}>
@@ -28,21 +49,21 @@ class ResetPassword extends Component {
                         <Form.Control
                            className="controlinput"
                            size="lg"
-                           type="email"
+                           type="password"
                            placeholder="Enter Password"
-                           name="email"
-                           value={password}
-                           onChange={this._onChange} />
+                           name="password"
+                           value={pass.password}
+                           onChange={this._onChange("pass")} />
                      </Form.Group>
                      <Form.Group controlId="formGroupEmail">
                         <Form.Control
                            className="controlinput"
                            size="lg"
-                           type="email"
+                           type="password"
                            placeholder="Confirm Password"
-                           name="email"
-                           value={confirmpassword}
-                           onChange={this._onChange} />
+                           name="confirmpassword"
+                           value={pass.confirmpassword}
+                           onChange={this._onChange("pass")} />
                      </Form.Group>
 
                      <Button

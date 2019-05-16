@@ -2,18 +2,18 @@ import React, { Component } from "react"
 import { toast } from "react-toastify"
 import actions from "../actions";
 import { connect } from "react-redux"
-import { Container, Col, Row, Button, Form, FormGroup } from "react-bootstrap"
-import { AssertionError } from "assert";
+import { Container, Col, Button, Form, FormGroup } from "react-bootstrap"
+
 class Products extends Component {
     state = {
         product: {
             name: "",
-            price: ""
+            price: "",
+            asset: {
+                url: ""
+            }
         },
-        asset: {
-            url: "",
-            alt: ""
-        },
+
         loading: true
     }
 
@@ -26,17 +26,17 @@ class Products extends Component {
 
     onProduct = (e) => {
         e.preventDefault()
-        const { product } = this.state
+        const { product, asset } = this.state
         this.setState({
             loading: true
         })
         actions
-            .addproductsapi(product)
+            .addproductsapi({ product, asset })
             .then(res => {
                 this.setState({
                     loading: false
                 })
-                console.log("product added")
+                toast.success("Product Added")
             })
             .catch(err => {
                 this.setState({
@@ -46,7 +46,9 @@ class Products extends Component {
             })
 
     }
-
+    showme = (event) => {
+        console.log(event)
+    }
     render() {
         const { product } = this.state
         return (
@@ -76,7 +78,7 @@ class Products extends Component {
                                     onChange={this._onChange("product")} />
                             </Form.Group>
                             <FormGroup>
-                                <Form.Control type="file" name="url" />
+                                <Form.Control type="file" name="url" value={product.asset.url} onChange={this._onChange("product")} />
                             </FormGroup>
                             <Button
                                 type="submit"
