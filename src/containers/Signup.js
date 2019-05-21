@@ -59,14 +59,14 @@ class Signup extends Component {
 
 		if (this.isValid(user)) {
 			actions
-				.onSignupPress(user)
+				.onSignupPress(user, address)
 				.then(res => {
 
 					this.notify();
 					this.redirectToLogin()
 				})
 				.catch(error => {
-
+					toast.warn(error, "Error in signup")
 				})
 
 		} else {

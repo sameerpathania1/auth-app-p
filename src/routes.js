@@ -8,9 +8,8 @@ import Products from "./component/Products";
 import MainComponent from "./containers/common/MainComponent";
 import ForgotPassword from "./component/ForgotPassword";
 import ResetPassword from "./component/ResetPassword";
-import CheckMail from "./component/CheckMail"
-import { privateDecrypt } from "crypto";
-
+import CheckMail from "./component/CheckMail";
+import DeleteProduct from "./component/DeleteProduct";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
 
@@ -51,6 +50,7 @@ export default class extends React.Component {
           <PublicRoute path="/checkmail" component={CheckMail} />
           <PrivateRoute path="/about" component={About} />
           <PrivateRoute path="/accountsettings" component={AccountSettings} />
+          <PrivateRoute path="/deleteproduct" component={DeleteProduct} />
           <Route component={NotFound} />
 
         </Switch>

@@ -1,12 +1,12 @@
 import React from 'react';
-
 const ShowProductCard = (props) => {
+
    return (
-      <div className="show-product-card">
+      <div className="show-product-card" onClick={props.onclick}>
          <img src={props.imageurl} alt={props.imagealt} />
          <h5>{props.name}</h5>
          <p>{props.price}</p>
-      </div>
+      </div >
    )
 }
 

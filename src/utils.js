@@ -14,14 +14,15 @@ export function apiPost(endpoint, data) {
 
 export function apiPut(endpoint, data) {
   const finalEndpoint = finalUrl(endpoint);
-  return axios["put"](finalEndpoint, data);
+  return apiRequest(finalEndpoint, data);
 }
 
 export function apiDelete(endpoint, data, header) {
   const user = getObject("user");
+  console.log(data, "wokring")
   const headers = { ...header, Authorization: user.token };
   const finalEndpoint = finalUrl(endpoint);
-  return axios.delete(finalEndpoint);
+  return apiRequest(finalEndpoint, data, "delete", {});
 }
 
 export function getHeaders() {
@@ -35,17 +36,48 @@ export function getHeaders() {
   return {};
 }
 
-export function apiRequest(endpoint, data, method, header = {}) {
-  const headers = { ...getHeaders(), ...header };
-  if (method === "get" || method === "delete") {
-    data = {
-      headers
+// export function apiRequest(endpoint, data, method, header = {}) {
+//   let headers = { ...getHeaders(), ...header };
+//   if (method === "get" || method === "delete") {
+//     data = {
+//       headers
+//     }
+//     headers = {};
+//   }
+//   console.log(data, headers, 'api request')
+//   return axios[method](endpoint, data, { headers }).then(res => {
+//     return res.data;
+//   },
+//     console.log(headers, "final im"))
+// }
+
+export function apiRequest(endPoint, data, method, headers) {
+  return new Promise((resolve, reject) => {
+    headers = {
+      ...getHeaders(),
+      ...headers
+    };
+
+    if (method === 'get' || method === 'delete') {
+      data = {
+        params: data,
+        // paramsSerializer: function (params) {
+        //   return queryString.stringify(params, { arrayFormat: "repeat" });
+        // },
+        headers
+      }
     }
-  }
-  return axios[method](endpoint, data, { headers }).then(res => {
-    return res.data;
-  },
-    console.log(headers, "final im"))
+
+    axios[method](endPoint, data, { headers }).then(response => {
+      const { data } = response;
+      if (data.status === false) {
+        return reject(data);
+      }
+      return resolve(data);
+    }).catch(error => {
+      return reject(error);
+    });
+  });
 }
 
 const finalUrl = slug => {

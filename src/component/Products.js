@@ -9,11 +9,10 @@ class Products extends Component {
         product: {
             name: "",
             price: "",
-            asset: {
-                url: ""
-            }
+            asset: "",
+            description: "",
+            rating: ""
         },
-
         loading: true
     }
 
@@ -21,20 +20,22 @@ class Products extends Component {
         let data = { ...this.state[key] };
         data[name] = value;
         this.setState({ [key]: data })
+        console.log(name, value, "imag and data")
     }
 
 
     onProduct = (e) => {
         e.preventDefault()
-        const { product, asset } = this.state
+        const { product } = this.state
+        console.log(this.state, "state data")
         this.setState({
             loading: true
         })
         actions
-            .addproductsapi({ product, asset })
+            .addproductsapi(product)
             .then(res => {
                 this.setState({
-                    loading: false
+                    loadsing: false
                 })
                 toast.success("Product Added")
             })
@@ -78,7 +79,7 @@ class Products extends Component {
                                     onChange={this._onChange("product")} />
                             </Form.Group>
                             <FormGroup>
-                                <Form.Control type="file" name="url" value={product.asset.url} onChange={this._onChange("product")} />
+                                <Form.Control type="file" name="asset" value={product.asset} onChange={this._onChange("product")} />
                             </FormGroup>
                             <Button
                                 type="submit"

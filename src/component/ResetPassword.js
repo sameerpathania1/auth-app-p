@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Container, Col, Button, Form } from "react-bootstrap"
 import actions from '../actions';
 import { toast } from 'react-toastify';
+import { getResetAPI } from '../apis/resetPassword';
+
+toast.configure()
 
 class ResetPassword extends Component {
    state = {
@@ -12,32 +15,46 @@ class ResetPassword extends Component {
    }
 
 
-   _onChange = (key) => ({ target: { value = {}, name = {} } }) => {
-      let data = { ...this.state }
+   _onChange = (key) => ({ target: { value, name } }) => {
+      let data = { ...this.state[key] };
       data[name] = value;
-      this.setState({
-         [key]: data
-      })
+      this.setState({ [key]: data })
    }
 
-   isValid = () => {
+   isValid() {
       const { password, confirmpassword } = this.state
       if (password === confirmpassword) {
-         return true;
+         return false;
       }
       return false;
    }
 
-   resetPassword = () => {
-      actions.resetPassword(this.isvalid() ? { token: this.props.match && this.props.match.params && this.props.match.params.token || "", password: this.state.password || '' } : toast.warn("Both Entered password should match"))
+   notify = () => {
+      toast.success("your password should match")
    }
 
+   resetPassword = () => {
+      actions.resetPassword({ token: this.props.match && this.props.match.params && this.props.match.params.token || "", password: this.state.password || '' })
+   }
+
+   resetpassbtn = (e) => {
+      e.preventDefault()
+      const { pass } = this.state
+      if (this.isValid()) {
+         if (this.resetPassword)
+            getResetAPI(pass).then(res => {
+            }).catch(err => {
+            })
+      }
+      else {
+         this.notify()
+      }
+   }
 
    componentDidMount() {
       console.log(this.props.match.params.token, 'param')
    }
    render() {
-      const { pass } = this.state;
 
       return (
          <Container fluid>
@@ -52,7 +69,7 @@ class ResetPassword extends Component {
                            type="password"
                            placeholder="Enter Password"
                            name="password"
-                           value={pass.password}
+                           value={this.state.pass.password}
                            onChange={this._onChange("pass")} />
                      </Form.Group>
                      <Form.Group controlId="formGroupEmail">
@@ -62,7 +79,7 @@ class ResetPassword extends Component {
                            type="password"
                            placeholder="Confirm Password"
                            name="confirmpassword"
-                           value={pass.confirmpassword}
+                           value={this.state.pass.confirmpassword}
                            onChange={this._onChange("pass")} />
                      </Form.Group>
 
@@ -73,7 +90,7 @@ class ResetPassword extends Component {
                         variant="primary"
                         size="lg"
                         block
-                        onClick={this.login}
+                        onClick={this.resetpassbtn}
                      >Procced
             </Button>
                   </Form>

@@ -15,7 +15,6 @@ export const addproductsapi = (data) => {
    productsfeth();
    return new Promise((resolve, reject) => {
       createProductAPI(data).then((res) => {
-
          dispatch({
             type: types.ADD_PRODUCT_SUCCESS,
             payload: res

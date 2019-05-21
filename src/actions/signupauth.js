@@ -1,7 +1,7 @@
 import types from "../types"
 import store from "../store";
 import { signupApi } from "../apis/auth"
-
+import { toast } from "react-toastify";
 
 const { dispatch } = store;
 
@@ -28,6 +28,7 @@ export function onSignupPress(data) {
             })
             .catch(error => {
                 reject(error);
+                toast.error(error.response.data.message || 'Something went wrong!');
             })
     })
 }
