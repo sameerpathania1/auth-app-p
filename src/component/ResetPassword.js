@@ -22,28 +22,33 @@ class ResetPassword extends Component {
    }
 
    isValid() {
-      const { password, confirmpassword } = this.state
+      const { password, confirmpassword } = this.state.pass
       if (password === confirmpassword) {
-         return false;
+         return true;
       }
       return false;
    }
 
    notify = () => {
-      toast.success("your password should match")
+      toast.warn("your password should match")
    }
 
    resetPassword = () => {
-      actions.resetPassword({ token: this.props.match && this.props.match.params && this.props.match.params.token || "", password: this.state.password || '' })
+      actions.resetPassword({ token: this.props.match && this.props.match.params && this.props.match.params.token || "", password: this.state.pass.password || '' })
    }
 
    resetpassbtn = (e) => {
       e.preventDefault()
-      const { pass } = this.state
+      const { password } = this.state.pass
       if (this.isValid()) {
          if (this.resetPassword)
-            getResetAPI(pass).then(res => {
+            getResetAPI(password).then(res => {
+               toast.success("Password Changed Redirecting to Login Page")
+               setTimeout(() => {
+                  this.props.history.push("/login")
+               }, 5000)
             }).catch(err => {
+               toast.warn(err.response.data.message || "Something went wrong")
             })
       }
       else {

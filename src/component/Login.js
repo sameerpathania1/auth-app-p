@@ -1,22 +1,22 @@
 import React, { Component } from "react";
-import { Col, Form, Button, Container } from "react-bootstrap"
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import Loader from "./Loading";
-import actions from "../actions"
-import { connect } from "react-redux"
+import { Col, Form, Button, Container } from "react-bootstrap";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Loader from "../component/loaders/Loading";
+import actions from "../actions";
+import { connect } from "react-redux";
 toast.configure();
 class Login extends Component {
   state = {
     user: {
       email: "",
-      password: "",
+      password: ""
     },
     loading: false,
     no: 0
   };
 
-  _onChange = ({ target: { name = '', value = '' } }) => {
+  _onChange = ({ target: { name = "", value = "" } }) => {
     this.setState({
       user: {
         ...this.state.user,
@@ -27,7 +27,7 @@ class Login extends Component {
 
   notify = () => toast.success("Logged In");
 
-  login = (e) => {
+  login = e => {
     e.preventDefault();
     const { user } = this.state;
     this.setState({ loading: true });
@@ -39,10 +39,8 @@ class Login extends Component {
       })
       .catch(() => {
         this.setState({ loading: false });
-      })
+      });
   };
-
-
 
   /*  getAllUsers = () => {
      console.log("getuserfun");
@@ -61,14 +59,16 @@ class Login extends Component {
    } */
 
   render() {
-    console.log(this.state.no, 'no')
+    console.log(this.state.no, "no");
     const { loading, user } = this.state;
 
     return (
       <Container fluid>
-        {loading && <div className="custom-loader">
-          <Loader />
-        </div>}
+        {loading && (
+          <div className="custom-loader">
+            <Loader />
+          </div>
+        )}
         <Col className="loginpage" xs={12} sm={4} md={{ span: 4, offset: 4 }}>
           <Col>
             <h1 style={{ textAlign: "center" }}>Sign In</h1>
@@ -81,10 +81,10 @@ class Login extends Component {
                   placeholder="Email"
                   name="email"
                   value={user.email}
-                  onChange={this._onChange} />
+                  onChange={this._onChange}
+                />
               </Form.Group>
               <Form.Group controlId="formGroupPassword">
-
                 <Form.Control
                   className="controlinput"
                   size="lg"
@@ -92,10 +92,16 @@ class Login extends Component {
                   value={user.password}
                   type="password"
                   placeholder="Password"
-                  onChange={this._onChange} />
+                  onChange={this._onChange}
+                />
               </Form.Group>
               <Form.Group>
-                <p style={{ margin: "10px 0px 0px 5px", cursor: "pointer" }} onClick={() => this.props.history.push("/forgotpassword")} >Forgot Password?</p>
+                <p
+                  style={{ margin: "10px 0px 0px 5px", cursor: "pointer" }}
+                  onClick={() => this.props.history.push("/forgotpassword")}
+                >
+                  Forgot Password?
+                </p>
               </Form.Group>
               <Button
                 type="submit"
@@ -105,8 +111,9 @@ class Login extends Component {
                 size="lg"
                 onClick={this.login}
                 block
-              >Sign in
-            </Button>
+              >
+                Sign in
+              </Button>
             </Form>
           </Col>
           <Col>

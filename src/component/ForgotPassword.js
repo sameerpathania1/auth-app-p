@@ -61,14 +61,9 @@ class ForgotPassword extends Component {
             </Button>
                   </Form>
                   <Row>
-                  <Col>
-                     <Form.Group>
-                        <p style={{ margin: "10px 0px 0px 5px", cursor: "pointer", color: "#2a558c" }} onClick={() => this.props.history.push("/resetpassword")} >For Test</p>
-                     </Form.Group>
-                     </Col>
                      <Col>
                         <Form.Group>
-                           <p style={{ margin: "10px 0px 0px 5px", cursor: "pointer", color: "#2a558c" }} onClick={() => this.props.history.push("/login")} >Back To Login</p>
+                           <p style={{ margin: "10px 0px 0px 5px", cursor: "pointer", color: "#2a558c" }} onClick={() => this.props.history.push("/login")} >Back to Login</p>
                         </Form.Group>
                      </Col>
                   </Row>

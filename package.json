@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@babel/core": "7.4.3",
+    "@material/textfield": "^2.1.1",
     "@svgr/webpack": "4.1.0",
     "@trendmicro/react-sidenav": "^0.4.5",
     "@typescript-eslint/eslint-plugin": "1.6.0",

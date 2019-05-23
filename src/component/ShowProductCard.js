@@ -1,13 +1,14 @@
-import React from 'react';
-const ShowProductCard = (props) => {
+import React from "react";
+import Loaderinside from "./loaders/Loaderinside";
 
-   return (
-      <div className="show-product-card" onClick={props.onclick}>
-         <img src={props.imageurl} alt={props.imagealt} />
-         <h5>{props.name}</h5>
-         <p>{props.price}</p>
-      </div >
-   )
-}
+const ShowProductCard = props => {
+  return (
+    <div className="show-product-card" onClick={props.onclick}>
+      <img src={props.imageurl} alt={props.imagealt} />
+      <h5>{props.name}</h5>
+      <p>{props.price}</p>
+    </div>
+  );
+};
 
-export default ShowProductCard
+export default ShowProductCard;

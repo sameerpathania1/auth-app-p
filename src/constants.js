@@ -1,5 +1,5 @@
 export const API_URL = "https://andy-apis.herokuapp.com";
-
+export const NEW_API = "https://newsapi.org/v2/top-headlines?sources=google-news&apiKey=b002a1635d0246319bad4f7f8fb577c8"
 
 export const countriesList = [
     { value: "AF", label: 'Afghanistan' },

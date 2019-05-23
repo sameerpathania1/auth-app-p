@@ -9,20 +9,20 @@ export function apiGet(endpoint) {
 export function apiPost(endpoint, data) {
   const finalEndpoint = finalUrl(endpoint);
   console.log(endpoint, getHeaders(), data, "apipost data for email")
-  return apiRequest(finalEndpoint, data, "post");
+  return apiRequest(finalEndpoint, data, "post", {});
 }
 
 export function apiPut(endpoint, data) {
   const finalEndpoint = finalUrl(endpoint);
-  return apiRequest(finalEndpoint, data);
+  return apiRequest(finalEndpoint, data, "put", {});
 }
 
-export function apiDelete(endpoint, data, header) {
-  const user = getObject("user");
-  console.log(data, "wokring")
-  const headers = { ...header, Authorization: user.token };
+export function apiDelete(endpoint/* , data, header */) {
+  /*   const user = getObject("user");
+    console.log(data, "wokring")
+    const headers = { ...header, Authorization: user.token }; */
   const finalEndpoint = finalUrl(endpoint);
-  return apiRequest(finalEndpoint, data, "delete", {});
+  return apiRequest(finalEndpoint, {}, "delete", {});
 }
 
 export function getHeaders() {

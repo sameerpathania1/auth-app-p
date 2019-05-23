@@ -1,65 +1,177 @@
-import React, { Component } from 'react';
-import { getObject } from '../utils';
-import { Button } from "react-bootstrap"
+import React, { Component } from "react";
+import { getObject } from "../utils";
+import { Button, Row, Col } from "react-bootstrap";
+import picedit from "../assets/editbuttonicon.png";
+import picclose from "../assets/closebtnicon.png";
+import { UpdateUser } from "../apis/accountsetting";
+import { toast } from "react-toastify";
+import { MDCTextField } from "@material/textfield";
 
 class AboutSettings extends Component {
-   state = {
-      user: {
-         email: '',
-         password: '',
-         confirmPassword: '',
-         firstName: '',
-         lastName: '',
-         phone: ''
-      },
-      address: {
-         address: '',
-         city: '',
-         state: '',
-         zipCode: '',
-         country: ''
-      },
-      btnshow: false
-   }
+  state = {
+    user: {
+      email: getObject("user").email,
+      password: getObject("user").password,
+      confirmPassword: getObject("user").confirmPassword,
+      firstName: getObject("user").firstName,
+      lastName: getObject("user").lastName,
+      phone: getObject("user").phone
+    },
+    address: {
+      address: getObject("user").address.address,
+      city: getObject("user").address.city,
+      state: getObject("user").address.state,
+      zipCode: getObject("user").address.zipCode,
+      country: getObject("user").address.country
+    },
+    btnshow: false
+  };
 
-   showbtn = () => {
-      this.setState({
-         btnshow: !this.state.btnshow
+  _onchange = key => ({ target: { value = "", name = "" } }) => {
+    let data = { ...this.state[key] };
+    data[name] = value;
+    this.setState({
+      [key]: data
+    });
+  };
+
+  showbtn = () => {
+    this.setState({
+      btnshow: !this.state.btnshow
+    });
+  };
+
+  submitChanges = id => {
+    const { user, address } = this.state;
+    UpdateUser(id, { user, address })
+      .then(res => {
+        toast.success("Changes Saved");
+        this.showbtn();
       })
-   }
+      .catch(err => {
+        toast.warn(err.response.data.message || "Something went Wrong");
+      });
+  };
 
-   render() {
+  render() {
+    const styles = {
+      width: "100%",
+      height: "100%",
+      cursor: "pointer"
+    };
 
-      const styles = {
-         fontSize: 40
-      }
-
-      let btnedit = <i style={styles} class="far fa-edit"></i>
-      if (this.state.btnshow) {
-         btnedit = <i style={styles} class="fas fa-times"></i>
-      }
-      const { btnshow } = this.state
-      return (
-
-         <div className="aboutuser">
-            <div style={{ float: "right", cursor: "pointer", color: "green" }} onClick={this.showbtn}>{btnedit}</div>
-
-            <p>FirstName: &nbsp; {btnshow ? <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" /> : <span>{getObject("user").firstName}</span>}</p>
-
-            <p>LastName: &nbsp; {btnshow ? <input type="text" placeholder={getObject("user").lastName} /> : <span>{getObject("user").lastName}</span>}</p>
-
-            <p>Email: &nbsp; {btnshow ? <input type="text" placeholder={getObject("user").email} /> : <span>{getObject("user").email}</span>} </p>
-
-            <p>Phone Number: &nbsp; {btnshow ? <input type="text" placeholder={getObject("user").phone} /> : <span>{getObject("user").phone}</span>} </p>
-
-            <p>Address: &nbsp; <span>{getObject("user").address.address}&nbsp;{getObject("user").address.city},&nbsp;{getObject("user").address.state},&nbsp;{getObject("user").address.country}</span></p>
-
-            <p>ZipCode: &nbsp; {btnshow ? <input type="text" placeholder={getObject("user").address.zipCode} /> : <span>{getObject("user").address.zipCode}</span>} </p>
-
-            {btnshow ? <Button centered variant="success">Save Changes</Button> : null}
-         </div>
+    let btnedit = (
+      <img style={styles} src={picedit} alt="" onClick={this.showbtn} />
+    );
+    if (this.state.btnshow) {
+      btnedit = (
+        <img style={styles} src={picclose} alt="" onClick={this.showbtn} />
       );
-   }
+    }
+
+    const { btnshow } = this.state;
+    return (
+      <div className="aboutuser">
+        <Row xs={12} sm={12} md={12}>
+          <Col xs={12} sm={10} md={10}>
+            <p>
+              FirstName: &nbsp;{" "}
+              {btnshow ? (
+                <input
+                  type="text"
+                  name="firstName"
+                  onChange={this._onchange("user")}
+                  value={this.state.user.firstName}
+                  placeholder="Enter FirstName"
+                />
+              ) : (
+                <span>{getObject("user").firstName}</span>
+              )}
+            </p>
+
+            <p>
+              LastName: &nbsp;{" "}
+              {btnshow ? (
+                <input
+                  type="text"
+                  name="lastName"
+                  onChange={this._onchange("user")}
+                  value={this.state.user.lastName}
+                  placeholder="Enter LastName"
+                />
+              ) : (
+                <span>{getObject("user").lastName}</span>
+              )}
+            </p>
+
+            <p>
+              Email: &nbsp;{" "}
+              {btnshow ? (
+                <input
+                  type="text"
+                  name="email"
+                  onChange={this._onchange("user")}
+                  value={this.state.user.email}
+                  placeholder="Enter Email"
+                />
+              ) : (
+                <span>{getObject("user").email}</span>
+              )}{" "}
+            </p>
+
+            <p>
+              Phone Number: &nbsp;{" "}
+              {btnshow ? (
+                <input
+                  type="text"
+                  name="phone"
+                  onChange={this._onchange("user")}
+                  value={this.state.user.phone}
+                  placeholder="Enter Phone Number"
+                />
+              ) : (
+                <span>{getObject("user").phone}</span>
+              )}{" "}
+            </p>
+
+            <p>
+              Address: &nbsp;
+              <span>
+                {getObject("user").address.address}&nbsp;
+                {getObject("user").address.city},&nbsp;
+                {getObject("user").address.state},&nbsp;
+                {getObject("user").address.country}
+              </span>
+            </p>
+
+            <p>
+              ZipCode: &nbsp;{" "}
+              {btnshow ? (
+                <input
+                  type="text"
+                  name="zipCode"
+                  onChange={this._onchange("address")}
+                  value={this.state.address.zipCode}
+                  placeholder="Enter LastName"
+                />
+              ) : (
+                <span>{getObject("user").address.zipCode}</span>
+              )}{" "}
+            </p>
+
+            {btnshow ? (
+              <Button onClick={this.submitChanges} centered variant="success">
+                Save Changes
+              </Button>
+            ) : null}
+          </Col>
+          <Col xs={12} sm={2} md={2}>
+            <div style={{ float: "right", color: "green" }}>{btnedit}</div>
+          </Col>
+        </Row>
+      </div>
+    );
+  }
 }
 
 export default AboutSettings;

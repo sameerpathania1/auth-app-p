@@ -1,6 +1,6 @@
-import { apiPost, apiGet } from "../utils";
+import { apiPost } from "../utils";
 
-export function getResetAPI() {
-   return apiGet("/users/reset-password")
+export function getResetAPI(data) {
+   return apiPost("/users/reset-password", data)
 }
 
