@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Form, Button, Container } from 'react-bootstrap';
 import { countriesList } from '../constants';
-import PropTypes from "prop-types"
+import classNames from 'classnames';
 
 const SignupForm = (props) => {
 	const { user = {}, errors = {}, address = {}, onChange, onSubmit, onCancel, goto } = props;
@@ -12,12 +12,12 @@ const SignupForm = (props) => {
 				<Form.Row>
 					<Form.Group as={Col}>
 						<Form.Label>First Name</Form.Label>
-						<Form.Control className={errors && errors.firstName ? 'error' : ''} type="text" name="firstName" value={user.firstName} onChange={onChange("user")} />
+						<Form.Control className={classNames({ error: errors && errors.fil })} type="text" name="firstName" value={user.firstName} onChange={onChange("user")} />
 						{errors && errors.firstName && <p className="error">{errors.firstName}</p>}
 					</Form.Group>
 					<Form.Group as={Col}>
 						<Form.Label>Last Name</Form.Label>
-						<Form.Control className={errors && errors.lastName ? 'error' : ''} type="text" name="lastName" value={user.lastName} onChange={onChange("user")} />
+						<Form.Control className={classNames({ error: errors && errors.lastName })} type="text" name="lastName" value={user.lastName} onChange={onChange("user")} />
 						{errors && errors.lastName && <p className="error">{errors.lastName}</p>}
 					</Form.Group>
 				</Form.Row>
@@ -25,7 +25,7 @@ const SignupForm = (props) => {
 				<Form.Row>
 					<Form.Group as={Col}>
 						<Form.Label>Email</Form.Label>
-						<Form.Control className={errors && errors.email ? 'error' : ''} type="text" name="email" value={user.email} onChange={onChange("user")} />
+						<Form.Control className={classNames({ error: errors && errors.email })} type="text" name="email" value={user.email} onChange={onChange("user")} />
 						{errors && errors.email && <p className="error">{errors.email}</p>}
 					</Form.Group>
 				</Form.Row>
@@ -33,7 +33,7 @@ const SignupForm = (props) => {
 				<Form.Row>
 					<Form.Group as={Col}>
 						<Form.Label>Phone</Form.Label>
-						<Form.Control className={errors && errors.phone ? 'error' : ''} type="text" name="phone" value={user.phone} onChange={onChange("user")} />
+						<Form.Control className={classNames({ error: errors && errors.phone })} type="text" name="phone" value={user.phone} onChange={onChange("user")} />
 						{errors && errors.phone && <p className="error">{errors.phone}</p>}
 					</Form.Group>
 				</Form.Row>
@@ -41,7 +41,7 @@ const SignupForm = (props) => {
 				<Form.Row>
 					<Form.Group as={Col}>
 						<Form.Label>Password</Form.Label>
-						<Form.Control className={errors && errors.password ? 'error' : ''} type="password" name="password" value={user.password} onChange={onChange("user")} />
+						<Form.Control className={classNames({ error: errors && errors.password })} type="password" name="password" value={user.password} onChange={onChange("user")} />
 						{errors && errors.password && <p className="error">{errors.password}</p>}
 					</Form.Group>
 				</Form.Row>
@@ -49,7 +49,7 @@ const SignupForm = (props) => {
 				<Form.Row>
 					<Form.Group as={Col}>
 						<Form.Label>Confirm Password</Form.Label>
-						<Form.Control className={errors && errors.confirmPassword ? 'error' : ''} type="password" name="confirmPassword" value={user.confirmPassword} onChange={onChange("user")} />
+						<Form.Control className={classNames({ error: errors && errors.confirmPassword })} type="password" name="confirmPassword" value={user.confirmPassword} onChange={onChange("user")} />
 						{errors && errors.confirmPassword && <p className="error">{errors.confirmPassword}</p>}
 					</Form.Group>
 				</Form.Row>
@@ -90,7 +90,7 @@ const SignupForm = (props) => {
 						<Button variant="success" type="submit" block>Submit</Button>
 					</Form.Group>
 					<Form.Group as={Col}>
-						<Button variant="secondary" type="submit" block onClick={onCancel}>Cancel</Button>
+						<Button variant="secondary" type="submit" block onClick={"onCancel"}>Cancel</Button>
 					</Form.Group>
 				</Form.Row>
 
@@ -107,12 +107,12 @@ const SignupForm = (props) => {
 
 export default SignupForm;
 
-SignupForm.prototype = {
-	user: PropTypes.array,
-	errors: PropTypes.array,
-	address: PropTypes.array,
+/* SignupForm.prototype = {
+	user: PropTypes.object,
+	errors: PropTypes.object,
+	address: PropTypes.object,
 	onChange: PropTypes.func,
 	onSubmit: PropTypes.func,
 	onCancel: PropTypes.func,
 	goto: PropTypes.func,
-}
+} */

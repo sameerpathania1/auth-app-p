@@ -13,7 +13,6 @@ export function createProductAPI(data, file) {
    data1.append('name', data.name)
    data1.append('price', data.price)
    data1.append("asset", file)
-   console.log(data1, "image and data1")
    return apiPost("/products", data1);
 }
 

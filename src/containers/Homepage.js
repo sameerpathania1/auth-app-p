@@ -1,11 +1,7 @@
 import React, { Component } from "react";
-import { removeObject, getObject, saveObject } from "../utils";
-import { Button } from "react-bootstrap";
 import { toast } from "react-toastify"
-import { productsApi } from "../apis/auth";
 import Axios from "axios";
 import NewsCard from "../component/newscard";
-import { Row } from "react-bootstrap"
 import Loader from "../component/loaders/Loaderinside";
 
 export default class extends Component {
@@ -37,7 +33,6 @@ export default class extends Component {
 
   render() {
     const { isloading, values } = this.state
-    console.log(this.state.values, "state values")
     return (
       <div style={{ textAlign: "center" }}>
         {isloading ? null : <h1>Your Daily News</h1>}

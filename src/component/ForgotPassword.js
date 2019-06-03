@@ -20,7 +20,6 @@ class ForgotPassword extends Component {
    forgotpassword = (e) => {
       e.preventDefault()
       const { user } = this.state
-      console.log(user, "email to send")
       forgotPasswordApi(user).then(() => {
          console.log("sended")
          this.props.history.push("/checkmail")

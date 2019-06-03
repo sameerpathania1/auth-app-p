@@ -8,7 +8,6 @@ export function apiGet(endpoint) {
 
 export function apiPost(endpoint, data) {
   const finalEndpoint = finalUrl(endpoint);
-  console.log(endpoint, getHeaders(), data, "apipost data for email")
   return apiRequest(finalEndpoint, data, "post", {});
 }
 
@@ -23,6 +22,11 @@ export function apiDelete(endpoint/* , data, header */) {
     const headers = { ...header, Authorization: user.token }; */
   const finalEndpoint = finalUrl(endpoint);
   return apiRequest(finalEndpoint, {}, "delete", {});
+}
+
+export function apiPatch(endpoint, data) {
+  const finalEndpoint = finalUrl(endpoint);
+  return apiRequest(finalEndpoint, data, "patch", {});
 }
 
 export function getHeaders() {
@@ -61,23 +65,22 @@ export function apiRequest(endPoint, data, method, headers) {
     if (method === 'get' || method === 'delete') {
       data = {
         params: data,
-        // paramsSerializer: function (params) {
-        //   return queryString.stringify(params, { arrayFormat: "repeat" });
-        // },
+        /*    paramsSerializer: function (params) {
+             return queryString.stringify(params, { arrayFormat: "repeat" });
+           }, */
         headers
       }
-    }
 
-    axios[method](endPoint, data, { headers }).then(response => {
-      const { data } = response;
-      if (data.status === false) {
-        return reject(data);
-      }
-      return resolve(data);
-    }).catch(error => {
-      return reject(error);
+      axios[method](endPoint, data, { headers }).then(response => {
+        const { data } = response;
+        if (data.status === false) {
+          return reject(data);
+        }
+        return resolve(data);
+      }).catch(error => {
+        return reject(error);
+      });
     });
-  });
 }
 
 const finalUrl = slug => {

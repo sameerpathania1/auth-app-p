@@ -69,11 +69,7 @@ class ShowProducts extends Component {
         toast.error(err.response.data.message || "Something went wrong");
       });
   };
-
-  refreshpage = () => {
-    this.props.history.push("/showproducts");
-  };
-
+  
   deleteproduct = productId => {
     if (this.state.show2) {
       deleteproduct(productId)

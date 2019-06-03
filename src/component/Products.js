@@ -20,10 +20,6 @@ class Products extends Component {
     }
 
     onChange = ({ target: { value, name, files = [] } }) => {
-        console.log(name, 'name');
-
-        console.log(files, 'files');
-
         let product = {
             ...this.state.product,
             [name]: value
@@ -33,13 +29,11 @@ class Products extends Component {
             product,
             file: files && files.length ? files[0] : {}
         });
-        console.log(this.state.file, "file")
     }
 
     onProduct = (e) => {
         e.preventDefault()
         const { product, file } = this.state
-        console.log(this.state, "state data")
         this.setState({
             loading: true
         })
@@ -58,14 +52,9 @@ class Products extends Component {
                 console.log("failed to add product")
             })
     }
-
-    showme = (event) => {
-        console.log(event)
-    }
     render() {
         const { product } = this.state
         return (
-
             <Container className="addproducts">
                 <Col className="addproducts-1">
                     <Col>

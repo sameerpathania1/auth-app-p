@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Col, Button, Form } from "react-bootstrap"
-import actions from '../actions';
+import { Container, Col, Button, Form } from "react-bootstrap";
 import { toast } from 'react-toastify';
 import { getResetAPI } from '../apis/resetPassword';
 
@@ -50,10 +49,6 @@ class ResetPassword extends Component {
       else {
          this.notify()
       }
-   }
-
-   componentDidMount() {
-      console.log(this.props.match.params.token, 'param')
    }
 
    render() {

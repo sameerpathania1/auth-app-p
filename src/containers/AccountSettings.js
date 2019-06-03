@@ -5,34 +5,31 @@ import picedit from "../assets/editbuttonicon.png";
 import picclose from "../assets/closebtnicon.png";
 import { UpdateUser } from "../apis/accountsetting";
 import { toast } from "react-toastify";
-import { MDCTextField } from "@material/textfield";
 
 class AboutSettings extends Component {
   state = {
     user: {
-      email: getObject("user").email,
-      password: getObject("user").password,
-      confirmPassword: getObject("user").confirmPassword,
-      firstName: getObject("user").firstName,
-      lastName: getObject("user").lastName,
-      phone: getObject("user").phone
-    },
-    address: {
-      address: getObject("user").address.address,
-      city: getObject("user").address.city,
-      state: getObject("user").address.state,
-      zipCode: getObject("user").address.zipCode,
-      country: getObject("user").address.country
+      email: "",
+      password: "",
+      confirmPassword: "",
+      firstName: "",
+      lastName: "",
+      phone: "",
+      address: {}
     },
     btnshow: false
   };
 
+  componentDidMount() {
+    const user = getObject("user");
+    const { email, name, ...restUser } = user;
+    this.setState({ user: restUser });
+  }
+
   _onchange = key => ({ target: { value = "", name = "" } }) => {
     let data = { ...this.state[key] };
     data[name] = value;
-    this.setState({
-      [key]: data
-    });
+    this.setState({ [key]: data });
   };
 
   showbtn = () => {
@@ -42,16 +39,16 @@ class AboutSettings extends Component {
   };
 
   submitChanges = () => {
-    const ids = getObject("user").id
-    console.log(ids, "jhdausdfgfkgsdfukgksdgfklsdagfkj")
-    const { user, address } = this.state;
-    UpdateUser(ids, { user, address })
+    const { user } = this.state;
+    const { id, ...restUser } = user
+    UpdateUser(id, restUser)
       .then(res => {
+        console.log(id, res, "res")
         toast.success("Changes Saved");
         this.showbtn();
       })
       .catch(err => {
-        toast.warn(err.response.data.message || "Something went Wrrong");
+        toast.warn(err.response.data.message || "Something went Wrong");
       });
   };
 
@@ -61,6 +58,8 @@ class AboutSettings extends Component {
       height: "100%",
       cursor: "pointer"
     };
+
+    console.log(this.state.user, 'user kupdateasldkfjksadlfjksd')
 
     let btnedit = (
       <img style={styles} src={picedit} alt="" onClick={this.showbtn} />
@@ -146,7 +145,7 @@ class AboutSettings extends Component {
               </span>
             </p>
 
-            <p>
+            {/*  <p>
               ZipCode: &nbsp;{" "}
               {btnshow ? (
                 <input
@@ -160,7 +159,7 @@ class AboutSettings extends Component {
                   <span>{getObject("user").address.zipCode}</span>
                 )}{" "}
             </p>
-
+ */}
             {btnshow ? (
               <Button onClick={this.submitChanges} centered variant="success">
                 Save Changes

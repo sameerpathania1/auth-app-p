@@ -59,7 +59,6 @@ class Login extends Component {
    } */
 
   render() {
-    console.log(this.state.no, "no");
     const { loading, user } = this.state;
 
     return (

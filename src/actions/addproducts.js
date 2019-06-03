@@ -5,14 +5,10 @@ import { toast } from 'react-toastify';
 
 const { dispatch } = store;
 
-const productsfeth = () => {
+export const addproductsapi = (data, file) => {
    dispatch({
       type: types.ADD_PRODUCT_REQUEST
    })
-}
-
-export const addproductsapi = (data, file) => {
-   productsfeth();
    return new Promise((resolve, reject) => {
       createProductAPI(data, file).then((res) => {
          dispatch({
