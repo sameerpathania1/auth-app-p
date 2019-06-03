@@ -1,6 +1,7 @@
 import React from "react";
 import { Col, Form, Button, Container } from 'react-bootstrap';
 import { countriesList } from '../constants';
+import PropTypes from "prop-types"
 
 const SignupForm = (props) => {
 	const { user = {}, errors = {}, address = {}, onChange, onSubmit, onCancel, goto } = props;
@@ -105,3 +106,13 @@ const SignupForm = (props) => {
 };
 
 export default SignupForm;
+
+SignupForm.prototype = {
+	user: PropTypes.array,
+	errors: PropTypes.array,
+	address: PropTypes.array,
+	onChange: PropTypes.func,
+	onSubmit: PropTypes.func,
+	onCancel: PropTypes.func,
+	goto: PropTypes.func,
+}

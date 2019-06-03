@@ -3,7 +3,7 @@ class Loaderinside extends Component {
   state = {};
   render() {
     return (
-      <div class="lds-roller">
+      <div className="lds-roller">
         <div />
         <div />
         <div />

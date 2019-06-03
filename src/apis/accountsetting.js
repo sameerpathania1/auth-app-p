@@ -1,5 +1,5 @@
 import { apiPut } from "../utils";
 
-export function UpdateUser(data) {
-  return apiPut("/users", data);
+export function UpdateUser(id, data) {
+  return apiPut(`/users/${id}`, data);
 }

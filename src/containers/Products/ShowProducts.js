@@ -108,7 +108,7 @@ class ShowProducts extends Component {
 
     return (
       <div>
-        <Col>
+        <Col style={{ padding: 0 }}>
           {isloading ? null : <h1>Total Products: &nbsp;{productsCount}</h1>}
         </Col>
         <Row className="list-wrapper-2">
@@ -118,9 +118,10 @@ class ShowProducts extends Component {
                 <ShowProductCard
                   imageurl={item.asset.url}
                   name={item.name}
+                  imagealt={0}
                   price={item.price}
                   onclick={() => this.selectProduct(item.id)}
-            
+
                 />
               );
             })

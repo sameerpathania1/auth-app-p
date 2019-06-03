@@ -11,10 +11,10 @@ const productsfeth = () => {
    })
 }
 
-export const addproductsapi = (data) => {
+export const addproductsapi = (data, file) => {
    productsfeth();
    return new Promise((resolve, reject) => {
-      createProductAPI(data).then((res) => {
+      createProductAPI(data, file).then((res) => {
          dispatch({
             type: types.ADD_PRODUCT_SUCCESS,
             payload: res

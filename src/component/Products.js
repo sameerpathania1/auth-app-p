@@ -9,30 +9,42 @@ class Products extends Component {
         product: {
             name: "",
             price: "",
-            asset: "",
             description: "",
             rating: ""
         },
+        asset: {
+            url: ""
+        },
+        file: [],
         loading: true
     }
 
-    _onChange = (key) => ({ target: { value, name } }) => {
-        let data = { ...this.state[key] };
-        data[name] = value;
-        this.setState({ [key]: data })
-        console.log(name, value, "imag and data")
-    }
+    onChange = ({ target: { value, name, files = [] } }) => {
+        console.log(name, 'name');
 
+        console.log(files, 'files');
+
+        let product = {
+            ...this.state.product,
+            [name]: value
+        };
+
+        this.setState({
+            product,
+            file: files && files.length ? files[0] : {}
+        });
+        console.log(this.state.file, "file")
+    }
 
     onProduct = (e) => {
         e.preventDefault()
-        const { product } = this.state
+        const { product, file } = this.state
         console.log(this.state, "state data")
         this.setState({
             loading: true
         })
         actions
-            .addproductsapi(product)
+            .addproductsapi(product, file)
             .then(res => {
                 this.setState({
                     loadsing: false
@@ -45,8 +57,8 @@ class Products extends Component {
                 })
                 console.log("failed to add product")
             })
-
     }
+
     showme = (event) => {
         console.log(event)
     }
@@ -55,7 +67,7 @@ class Products extends Component {
         return (
 
             <Container className="addproducts">
-                <Col className="addproducts-1" xs={12} sm={4} md={{ span: 4, offset: 4 }}>
+                <Col className="addproducts-1">
                     <Col>
                         <Form onSubmit={this.onProduct}>
                             <Form.Group controlId="formGroupEmail">
@@ -66,7 +78,7 @@ class Products extends Component {
                                     placeholder="Enter product Name"
                                     name="name"
                                     value={product.name}
-                                    onChange={this._onChange("product")} />
+                                    onChange={this.onChange} />
                             </Form.Group>
                             <Form.Group controlId="formGroupEmail">
                                 <Form.Control
@@ -76,10 +88,10 @@ class Products extends Component {
                                     placeholder="Enter Product Price"
                                     name="price"
                                     value={product.price}
-                                    onChange={this._onChange("product")} />
+                                    onChange={this.onChange} />
                             </Form.Group>
                             <FormGroup>
-                                <Form.Control type="file" name="asset" value={product.asset} onChange={this._onChange("product")} />
+                                <Form.Control type="file" name="asset" value={product.asset} onChange={this.onChange} />
                             </FormGroup>
                             <Button
                                 type="submit"

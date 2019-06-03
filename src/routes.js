@@ -11,6 +11,8 @@ import ResetPassword from "./component/ResetPassword";
 import CheckMail from "./component/CheckMail";
 import DeleteProduct from "./component/DeleteProduct";
 
+
+
 const PrivateRoute = ({ component: Component, ...rest }) => (
 
   <Route

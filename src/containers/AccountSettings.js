@@ -41,15 +41,17 @@ class AboutSettings extends Component {
     });
   };
 
-  submitChanges = id => {
+  submitChanges = () => {
+    const ids = getObject("user").id
+    console.log(ids, "jhdausdfgfkgsdfukgksdgfklsdagfkj")
     const { user, address } = this.state;
-    UpdateUser(id, { user, address })
+    UpdateUser(ids, { user, address })
       .then(res => {
         toast.success("Changes Saved");
         this.showbtn();
       })
       .catch(err => {
-        toast.warn(err.response.data.message || "Something went Wrong");
+        toast.warn(err.response.data.message || "Something went Wrrong");
       });
   };
 
@@ -85,8 +87,8 @@ class AboutSettings extends Component {
                   placeholder="Enter FirstName"
                 />
               ) : (
-                <span>{getObject("user").firstName}</span>
-              )}
+                  <span>{getObject("user").firstName}</span>
+                )}
             </p>
 
             <p>
@@ -100,8 +102,8 @@ class AboutSettings extends Component {
                   placeholder="Enter LastName"
                 />
               ) : (
-                <span>{getObject("user").lastName}</span>
-              )}
+                  <span>{getObject("user").lastName}</span>
+                )}
             </p>
 
             <p>
@@ -115,8 +117,8 @@ class AboutSettings extends Component {
                   placeholder="Enter Email"
                 />
               ) : (
-                <span>{getObject("user").email}</span>
-              )}{" "}
+                  <span>{getObject("user").email}</span>
+                )}{" "}
             </p>
 
             <p>
@@ -130,8 +132,8 @@ class AboutSettings extends Component {
                   placeholder="Enter Phone Number"
                 />
               ) : (
-                <span>{getObject("user").phone}</span>
-              )}{" "}
+                  <span>{getObject("user").phone}</span>
+                )}{" "}
             </p>
 
             <p>
@@ -155,8 +157,8 @@ class AboutSettings extends Component {
                   placeholder="Enter LastName"
                 />
               ) : (
-                <span>{getObject("user").address.zipCode}</span>
-              )}{" "}
+                  <span>{getObject("user").address.zipCode}</span>
+                )}{" "}
             </p>
 
             {btnshow ? (

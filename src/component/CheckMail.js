@@ -16,7 +16,7 @@ class CheckMail extends Component {
                   variant="primary"
                   size="lg"
                   block
-                  onClick={this.props.history.push("./login")}
+                  onClick={() => this.props.history.push("./login")}
                >Procced
             </Button>
                <Col>

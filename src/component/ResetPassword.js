@@ -30,26 +30,22 @@ class ResetPassword extends Component {
    }
 
    notify = () => {
-      toast.warn("your password should match")
-   }
-
-   resetPassword = () => {
-      actions.resetPassword({ token: this.props.match && this.props.match.params && this.props.match.params.token || "", password: this.state.pass.password || '' })
+      toast("your password should match")
    }
 
    resetpassbtn = (e) => {
       e.preventDefault()
-      const { password } = this.state.pass
+      const { pass } = this.state
       if (this.isValid()) {
-         if (this.resetPassword)
-            getResetAPI(password).then(res => {
-               toast.success("Password Changed Redirecting to Login Page")
-               setTimeout(() => {
-                  this.props.history.push("/login")
-               }, 5000)
-            }).catch(err => {
-               toast.warn(err.response.data.message || "Something went wrong")
-            })
+         getResetAPI(pass).then(res => {
+            console.log("password changed")
+            toast.success("Password Changed Redirecting to Login Page")
+            setTimeout(() => {
+               this.props.history.push("/login")
+            }, 5000)
+         }).catch(err => {
+            toast.warn(err.response.data.message || "Something went wrong")
+         })
       }
       else {
          this.notify()
@@ -59,6 +55,7 @@ class ResetPassword extends Component {
    componentDidMount() {
       console.log(this.props.match.params.token, 'param')
    }
+
    render() {
 
       return (

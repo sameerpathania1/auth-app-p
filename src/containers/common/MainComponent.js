@@ -17,11 +17,11 @@ class MainComponent extends Component {
                         <CustomNav {...this.props} />
                     </Col>
                     <Col xs={12} sm={12} md={12}>
-                        <Row>
-                            <Col xs={12} sm={1} md={1}>
+                        <Row style={{ marginTop: 55 }}>
+                            <Col xs={12} sm={2} md={2} style={{ padding: 0 }}>
                                 <SideBar {...this.props} />
                             </Col>
-                            <Col xs={12} sm={11} md={11}>
+                            <Col xs={12} sm={10} md={10} style={{ padding: 0 }}>
                                 <div className="body-wrapper">
                                     {this.props.children}
                                 </div>
@@ -29,7 +29,8 @@ class MainComponent extends Component {
                         </Row>
                     </Col>
                 </Row>
-            </Container>)
+            </Container>
+        )
     }
 }
 
