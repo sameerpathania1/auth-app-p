@@ -65,22 +65,23 @@ export function apiRequest(endPoint, data, method, headers) {
     if (method === 'get' || method === 'delete') {
       data = {
         params: data,
-        /*    paramsSerializer: function (params) {
-             return queryString.stringify(params, { arrayFormat: "repeat" });
-           }, */
+        // paramsSerializer: function (params) {
+        //   return queryString.stringify(params, { arrayFormat: "repeat" });
+        // },
         headers
       }
+    }
 
-      axios[method](endPoint, data, { headers }).then(response => {
-        const { data } = response;
-        if (data.status === false) {
-          return reject(data);
-        }
-        return resolve(data);
-      }).catch(error => {
-        return reject(error);
-      });
+    axios[method](endPoint, data, { headers }).then(response => {
+      const { data } = response;
+      if (data.status === false) {
+        return reject(data);
+      }
+      return resolve(data);
+    }).catch(error => {
+      return reject(error);
     });
+  });
 }
 
 const finalUrl = slug => {
